@@ -1,0 +1,24 @@
+// filepath: /Users/imtiazmamun/Documents/GitHubProjects/Full-Stack/itz-project/src/app/(protected)/dashboard/page.tsx
+import { Sidebar } from '@/components/Sidebar'; // Assuming you have a Sidebar component
+import { Button } from 'shadcn-ui'; // Importing shadcn components
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'Your dashboard for managing the application',
+};
+
+export default async function DashboardPage() {
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <main className="flex-1 p-6">
+        <h1 className="text-2xl font-bold text-green-700">Dashboard Page</h1>
+        <div className="mt-4">
+          <Button className="bg-green-500 hover:bg-green-600 text-white">Action Button</Button>
+          {/* Add more components and content here */}
+        </div>
+      </main>
+    </div>
+  );
+}

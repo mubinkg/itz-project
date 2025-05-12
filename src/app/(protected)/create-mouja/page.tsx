@@ -3,9 +3,9 @@ import { Input } from "@/components/ui/input"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
-export default function MouzaManagementPage() {
+export default function Page() {
     return (
-        <div className="container mx-auto py-6 px-4 max-w-4xl">
+        <div className="mx-auto py-6 px-4 max-w-4xl">
             {/* Header with back button */}
             <div className="flex justify-between items-center mb-8">
                 <div className="flex-1"></div>
@@ -57,7 +57,7 @@ export default function MouzaManagementPage() {
                                     <td className="p-3 text-green-600">{item.time}</td>
                                     <td className="p-3">
                                         <div className="flex gap-1">
-                                            <Link href="#" className="text-blue-500 hover:underline">
+                                            <Link href="/create-nothi" className="text-blue-500 hover:underline">
                                                 Edit
                                             </Link>{" "}
                                             |{" "}

@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-export default function LandRecordsPage() {
+export default function Page() {
     return (
         <div className="container mx-auto py-6 px-4">
             {/* Header */}

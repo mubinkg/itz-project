@@ -10,7 +10,7 @@ export default function LandOffice() {
   const router = useRouter()
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
+    <div>
       <div className="text-center mb-8">
         <h1 className="text-2xl font-semibold">সহকারী কামিশনার (ভূমি)</h1>
         <h2 className="text-xl mt-1">উপজেলা ভূমি অফিস</h2>

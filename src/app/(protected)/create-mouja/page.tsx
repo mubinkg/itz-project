@@ -5,18 +5,10 @@ import Link from "next/link"
 
 export default function Page() {
     return (
-        <div className="mx-auto py-6 px-4 max-w-4xl">
+        <div>
             {/* Header with back button */}
             <div className="flex justify-between items-center mb-8">
-                <div className="flex-1"></div>
                 <h1 className="text-2xl font-semibold text-center flex-1">মৌজা তৈরি করুন</h1>
-                <div className="flex-1 flex justify-end">
-                    <Button variant="success" size="icon" asChild>
-                        <Link href="#">
-                            <ArrowLeft className="h-4 w-4" />
-                        </Link>
-                    </Button>
-                </div>
             </div>
 
             {/* Form section */}

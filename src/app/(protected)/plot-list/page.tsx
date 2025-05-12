@@ -4,7 +4,7 @@ import { Search } from "lucide-react"
 
 export default function PlotListPage() {
     return (
-        <div className="container mx-auto py-6 px-4 max-w-7xl">
+        <div>
             {/* Header with search */}
             <div className="bg-green-700 text-white p-4 flex justify-between items-center mb-4">
                 <h1 className="text-xl font-semibold">দাগ নং এর তালিকা</h1>

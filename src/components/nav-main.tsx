@@ -17,6 +17,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
 
 export function NavMain({
   items,
@@ -26,46 +27,25 @@ export function NavMain({
     url: string
     icon?: LucideIcon
     isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
   }[]
 }) {
+  const router = useRouter()
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <SidebarGroup className="mt-2">
       <SidebarMenu>
         {items.map((item) => (
-          <Collapsible
+          <div
             key={item.title}
-            asChild
-            defaultOpen={item.isActive}
             className="group/collapsible"
           >
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
-                  <span>{item.title}</span>
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
+            <SidebarMenuItem onClick={() => router.push(item.url)} className="cursor-pointer">
+              <SidebarMenuButton tooltip={item.title}>
+                {item.icon && <item.icon />}
+                <span>{item.title}</span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </SidebarMenuButton>
             </SidebarMenuItem>
-          </Collapsible>
+          </div>
         ))}
       </SidebarMenu>
     </SidebarGroup>

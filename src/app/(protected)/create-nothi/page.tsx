@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 export default function Page() {
     return (
-        <div className="container mx-auto py-6 px-4 max-w-6xl">
+        <div>
             {/* Header */}
             <h1 className="text-2xl font-semibold text-center mb-8">মৌজার নথি তৈরি করুন</h1>
 

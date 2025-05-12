@@ -1,9 +1,14 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useRouter } from "next/navigation"
 
 export default function LandOffice() {
+  const router = useRouter()
+
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="text-center mb-8">
@@ -13,7 +18,7 @@ export default function LandOffice() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-        <Card className="p-4 border-2 border-red-500 flex-1">
+        <Card className="p-4 border-2 border-green-500 flex-1">
           <div className="mb-2 font-medium">মৌজা</div>
           <Select>
             <SelectTrigger className="w-full">
@@ -33,7 +38,7 @@ export default function LandOffice() {
           </Select>
         </Card>
 
-        <Card className="p-4 border-2 border-red-500 flex-1">
+        <Card className="p-4 border-2 border-green-500 flex-1">
           <div className="mb-2 font-medium">রেকর্ড এর ধরন</div>
           <Select>
             <SelectTrigger className="w-full">
@@ -49,11 +54,11 @@ export default function LandOffice() {
           </Select>
         </Card>
 
-        <Card className="p-4 border-2 border-red-500 flex-1">
+        <Card className="p-4 border-2 border-green-500 flex-1">
           <div className="mb-2 font-medium">দাগ নং</div>
           <div className="flex gap-2">
             <Input placeholder="দাগ" />
-            <Button className="bg-green-600 hover:bg-green-700">Search</Button>
+            <Button className="bg-green-600 hover:bg-green-700" onClick={() => router.push('/results')}>Search</Button>
           </div>
         </Card>
       </div>

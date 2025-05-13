@@ -114,7 +114,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\mubin\\itz-project\\src\\generated\\prisma",
+      "value": "/home/upay/mubin/itz-project/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -123,12 +123,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\mubin\\itz-project\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/upay/mubin/itz-project/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

@@ -1,31 +1,31 @@
-'use client'
+'use client';
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { login } from "@/actions/auth"
-import { toast } from "sonner"
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { login } from '@/actions/auth';
+import { toast } from 'sonner';
 
 export function LoginForm({
   className,
   ...props
-}: React.ComponentProps<"div">) {
-  const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+}: React.ComponentProps<'div'>) {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
@@ -34,16 +34,18 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={async (e) => {
-            e.preventDefault();
-            const data = await login({ email, password })
-            if (data.success) {
-              toast.success(data.message)
-              router.push('/dashboard')
-            } else {
-              toast.error(data.message)
-            }
-          }}>
+          <form
+            onSubmit={async e => {
+              e.preventDefault();
+              const data = await login({ email, password });
+              if (data.success) {
+                toast.success(data.message);
+                router.push('/dashboard');
+              } else {
+                toast.error(data.message);
+              }
+            }}
+          >
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
@@ -52,20 +54,22 @@ export function LoginForm({
                   type="email"
                   placeholder="m@example.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                 />
               </div>
               <div className="grid gap-3">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
               </div>
               <div className="flex flex-col gap-3">
-                <Button
-                  type="submit"
-                  className="w-full"
-                >
+                <Button type="submit" className="w-full">
                   Login
                 </Button>
               </div>
@@ -73,6 +77,6 @@ export function LoginForm({
           </form>
         </CardContent>
       </Card>
-    </div >
-  )
+    </div>
+  );
 }

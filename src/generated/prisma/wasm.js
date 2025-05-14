@@ -122,6 +122,13 @@ exports.Prisma.UserScalarFieldEnum = {
   photo: 'photo'
 };
 
+exports.Prisma.MoujaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -129,7 +136,8 @@ exports.Prisma.SortOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Mouja: 'Mouja'
 };
 
 /**

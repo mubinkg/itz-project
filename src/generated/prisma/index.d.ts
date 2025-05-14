@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Mouja
+ * 
+ */
+export type Mouja = $Result.DefaultSelection<Prisma.$MoujaPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mouja`: Exposes CRUD operations for the **Mouja** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Moujas
+    * const moujas = await prisma.mouja.findMany()
+    * ```
+    */
+  get mouja(): Prisma.MoujaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    Mouja: 'Mouja'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "mouja"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Mouja: {
+        payload: Prisma.$MoujaPayload<ExtArgs>
+        fields: Prisma.MoujaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MoujaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MoujaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>
+          }
+          findFirst: {
+            args: Prisma.MoujaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MoujaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>
+          }
+          findMany: {
+            args: Prisma.MoujaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>[]
+          }
+          create: {
+            args: Prisma.MoujaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>
+          }
+          createMany: {
+            args: Prisma.MoujaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MoujaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>[]
+          }
+          delete: {
+            args: Prisma.MoujaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>
+          }
+          update: {
+            args: Prisma.MoujaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>
+          }
+          deleteMany: {
+            args: Prisma.MoujaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MoujaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MoujaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>[]
+          }
+          upsert: {
+            args: Prisma.MoujaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoujaPayload>
+          }
+          aggregate: {
+            args: Prisma.MoujaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMouja>
+          }
+          groupBy: {
+            args: Prisma.MoujaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MoujaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MoujaCountArgs<ExtArgs>
+            result: $Utils.Optional<MoujaCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    mouja?: MoujaOmit
   }
 
   /* Types for Logging */
@@ -1863,6 +1954,986 @@ export namespace Prisma {
 
 
   /**
+   * Model Mouja
+   */
+
+  export type AggregateMouja = {
+    _count: MoujaCountAggregateOutputType | null
+    _min: MoujaMinAggregateOutputType | null
+    _max: MoujaMaxAggregateOutputType | null
+  }
+
+  export type MoujaMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MoujaMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MoujaCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MoujaMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MoujaMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MoujaCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MoujaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Mouja to aggregate.
+     */
+    where?: MoujaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Moujas to fetch.
+     */
+    orderBy?: MoujaOrderByWithRelationInput | MoujaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MoujaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Moujas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Moujas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Moujas
+    **/
+    _count?: true | MoujaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MoujaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MoujaMaxAggregateInputType
+  }
+
+  export type GetMoujaAggregateType<T extends MoujaAggregateArgs> = {
+        [P in keyof T & keyof AggregateMouja]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMouja[P]>
+      : GetScalarType<T[P], AggregateMouja[P]>
+  }
+
+
+
+
+  export type MoujaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoujaWhereInput
+    orderBy?: MoujaOrderByWithAggregationInput | MoujaOrderByWithAggregationInput[]
+    by: MoujaScalarFieldEnum[] | MoujaScalarFieldEnum
+    having?: MoujaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MoujaCountAggregateInputType | true
+    _min?: MoujaMinAggregateInputType
+    _max?: MoujaMaxAggregateInputType
+  }
+
+  export type MoujaGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: MoujaCountAggregateOutputType | null
+    _min: MoujaMinAggregateOutputType | null
+    _max: MoujaMaxAggregateOutputType | null
+  }
+
+  type GetMoujaGroupByPayload<T extends MoujaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MoujaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MoujaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MoujaGroupByOutputType[P]>
+            : GetScalarType<T[P], MoujaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MoujaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["mouja"]>
+
+  export type MoujaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["mouja"]>
+
+  export type MoujaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["mouja"]>
+
+  export type MoujaSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MoujaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["mouja"]>
+
+  export type $MoujaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Mouja"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mouja"]>
+    composites: {}
+  }
+
+  type MoujaGetPayload<S extends boolean | null | undefined | MoujaDefaultArgs> = $Result.GetResult<Prisma.$MoujaPayload, S>
+
+  type MoujaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MoujaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MoujaCountAggregateInputType | true
+    }
+
+  export interface MoujaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Mouja'], meta: { name: 'Mouja' } }
+    /**
+     * Find zero or one Mouja that matches the filter.
+     * @param {MoujaFindUniqueArgs} args - Arguments to find a Mouja
+     * @example
+     * // Get one Mouja
+     * const mouja = await prisma.mouja.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MoujaFindUniqueArgs>(args: SelectSubset<T, MoujaFindUniqueArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Mouja that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MoujaFindUniqueOrThrowArgs} args - Arguments to find a Mouja
+     * @example
+     * // Get one Mouja
+     * const mouja = await prisma.mouja.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MoujaFindUniqueOrThrowArgs>(args: SelectSubset<T, MoujaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Mouja that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaFindFirstArgs} args - Arguments to find a Mouja
+     * @example
+     * // Get one Mouja
+     * const mouja = await prisma.mouja.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MoujaFindFirstArgs>(args?: SelectSubset<T, MoujaFindFirstArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Mouja that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaFindFirstOrThrowArgs} args - Arguments to find a Mouja
+     * @example
+     * // Get one Mouja
+     * const mouja = await prisma.mouja.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MoujaFindFirstOrThrowArgs>(args?: SelectSubset<T, MoujaFindFirstOrThrowArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Moujas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Moujas
+     * const moujas = await prisma.mouja.findMany()
+     * 
+     * // Get first 10 Moujas
+     * const moujas = await prisma.mouja.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const moujaWithIdOnly = await prisma.mouja.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MoujaFindManyArgs>(args?: SelectSubset<T, MoujaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Mouja.
+     * @param {MoujaCreateArgs} args - Arguments to create a Mouja.
+     * @example
+     * // Create one Mouja
+     * const Mouja = await prisma.mouja.create({
+     *   data: {
+     *     // ... data to create a Mouja
+     *   }
+     * })
+     * 
+     */
+    create<T extends MoujaCreateArgs>(args: SelectSubset<T, MoujaCreateArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Moujas.
+     * @param {MoujaCreateManyArgs} args - Arguments to create many Moujas.
+     * @example
+     * // Create many Moujas
+     * const mouja = await prisma.mouja.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MoujaCreateManyArgs>(args?: SelectSubset<T, MoujaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Moujas and returns the data saved in the database.
+     * @param {MoujaCreateManyAndReturnArgs} args - Arguments to create many Moujas.
+     * @example
+     * // Create many Moujas
+     * const mouja = await prisma.mouja.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Moujas and only return the `id`
+     * const moujaWithIdOnly = await prisma.mouja.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MoujaCreateManyAndReturnArgs>(args?: SelectSubset<T, MoujaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Mouja.
+     * @param {MoujaDeleteArgs} args - Arguments to delete one Mouja.
+     * @example
+     * // Delete one Mouja
+     * const Mouja = await prisma.mouja.delete({
+     *   where: {
+     *     // ... filter to delete one Mouja
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MoujaDeleteArgs>(args: SelectSubset<T, MoujaDeleteArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Mouja.
+     * @param {MoujaUpdateArgs} args - Arguments to update one Mouja.
+     * @example
+     * // Update one Mouja
+     * const mouja = await prisma.mouja.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MoujaUpdateArgs>(args: SelectSubset<T, MoujaUpdateArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Moujas.
+     * @param {MoujaDeleteManyArgs} args - Arguments to filter Moujas to delete.
+     * @example
+     * // Delete a few Moujas
+     * const { count } = await prisma.mouja.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MoujaDeleteManyArgs>(args?: SelectSubset<T, MoujaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Moujas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Moujas
+     * const mouja = await prisma.mouja.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MoujaUpdateManyArgs>(args: SelectSubset<T, MoujaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Moujas and returns the data updated in the database.
+     * @param {MoujaUpdateManyAndReturnArgs} args - Arguments to update many Moujas.
+     * @example
+     * // Update many Moujas
+     * const mouja = await prisma.mouja.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Moujas and only return the `id`
+     * const moujaWithIdOnly = await prisma.mouja.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MoujaUpdateManyAndReturnArgs>(args: SelectSubset<T, MoujaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Mouja.
+     * @param {MoujaUpsertArgs} args - Arguments to update or create a Mouja.
+     * @example
+     * // Update or create a Mouja
+     * const mouja = await prisma.mouja.upsert({
+     *   create: {
+     *     // ... data to create a Mouja
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Mouja we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MoujaUpsertArgs>(args: SelectSubset<T, MoujaUpsertArgs<ExtArgs>>): Prisma__MoujaClient<$Result.GetResult<Prisma.$MoujaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Moujas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaCountArgs} args - Arguments to filter Moujas to count.
+     * @example
+     * // Count the number of Moujas
+     * const count = await prisma.mouja.count({
+     *   where: {
+     *     // ... the filter for the Moujas we want to count
+     *   }
+     * })
+    **/
+    count<T extends MoujaCountArgs>(
+      args?: Subset<T, MoujaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MoujaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Mouja.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MoujaAggregateArgs>(args: Subset<T, MoujaAggregateArgs>): Prisma.PrismaPromise<GetMoujaAggregateType<T>>
+
+    /**
+     * Group by Mouja.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoujaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MoujaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MoujaGroupByArgs['orderBy'] }
+        : { orderBy?: MoujaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MoujaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMoujaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Mouja model
+   */
+  readonly fields: MoujaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Mouja.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MoujaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Mouja model
+   */
+  interface MoujaFieldRefs {
+    readonly id: FieldRef<"Mouja", 'String'>
+    readonly name: FieldRef<"Mouja", 'String'>
+    readonly createdAt: FieldRef<"Mouja", 'DateTime'>
+    readonly updatedAt: FieldRef<"Mouja", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Mouja findUnique
+   */
+  export type MoujaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * Filter, which Mouja to fetch.
+     */
+    where: MoujaWhereUniqueInput
+  }
+
+  /**
+   * Mouja findUniqueOrThrow
+   */
+  export type MoujaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * Filter, which Mouja to fetch.
+     */
+    where: MoujaWhereUniqueInput
+  }
+
+  /**
+   * Mouja findFirst
+   */
+  export type MoujaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * Filter, which Mouja to fetch.
+     */
+    where?: MoujaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Moujas to fetch.
+     */
+    orderBy?: MoujaOrderByWithRelationInput | MoujaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Moujas.
+     */
+    cursor?: MoujaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Moujas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Moujas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Moujas.
+     */
+    distinct?: MoujaScalarFieldEnum | MoujaScalarFieldEnum[]
+  }
+
+  /**
+   * Mouja findFirstOrThrow
+   */
+  export type MoujaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * Filter, which Mouja to fetch.
+     */
+    where?: MoujaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Moujas to fetch.
+     */
+    orderBy?: MoujaOrderByWithRelationInput | MoujaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Moujas.
+     */
+    cursor?: MoujaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Moujas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Moujas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Moujas.
+     */
+    distinct?: MoujaScalarFieldEnum | MoujaScalarFieldEnum[]
+  }
+
+  /**
+   * Mouja findMany
+   */
+  export type MoujaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * Filter, which Moujas to fetch.
+     */
+    where?: MoujaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Moujas to fetch.
+     */
+    orderBy?: MoujaOrderByWithRelationInput | MoujaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Moujas.
+     */
+    cursor?: MoujaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Moujas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Moujas.
+     */
+    skip?: number
+    distinct?: MoujaScalarFieldEnum | MoujaScalarFieldEnum[]
+  }
+
+  /**
+   * Mouja create
+   */
+  export type MoujaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Mouja.
+     */
+    data: XOR<MoujaCreateInput, MoujaUncheckedCreateInput>
+  }
+
+  /**
+   * Mouja createMany
+   */
+  export type MoujaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Moujas.
+     */
+    data: MoujaCreateManyInput | MoujaCreateManyInput[]
+  }
+
+  /**
+   * Mouja createManyAndReturn
+   */
+  export type MoujaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Moujas.
+     */
+    data: MoujaCreateManyInput | MoujaCreateManyInput[]
+  }
+
+  /**
+   * Mouja update
+   */
+  export type MoujaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Mouja.
+     */
+    data: XOR<MoujaUpdateInput, MoujaUncheckedUpdateInput>
+    /**
+     * Choose, which Mouja to update.
+     */
+    where: MoujaWhereUniqueInput
+  }
+
+  /**
+   * Mouja updateMany
+   */
+  export type MoujaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Moujas.
+     */
+    data: XOR<MoujaUpdateManyMutationInput, MoujaUncheckedUpdateManyInput>
+    /**
+     * Filter which Moujas to update
+     */
+    where?: MoujaWhereInput
+    /**
+     * Limit how many Moujas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mouja updateManyAndReturn
+   */
+  export type MoujaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * The data used to update Moujas.
+     */
+    data: XOR<MoujaUpdateManyMutationInput, MoujaUncheckedUpdateManyInput>
+    /**
+     * Filter which Moujas to update
+     */
+    where?: MoujaWhereInput
+    /**
+     * Limit how many Moujas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mouja upsert
+   */
+  export type MoujaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Mouja to update in case it exists.
+     */
+    where: MoujaWhereUniqueInput
+    /**
+     * In case the Mouja found by the `where` argument doesn't exist, create a new Mouja with this data.
+     */
+    create: XOR<MoujaCreateInput, MoujaUncheckedCreateInput>
+    /**
+     * In case the Mouja was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MoujaUpdateInput, MoujaUncheckedUpdateInput>
+  }
+
+  /**
+   * Mouja delete
+   */
+  export type MoujaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+    /**
+     * Filter which Mouja to delete.
+     */
+    where: MoujaWhereUniqueInput
+  }
+
+  /**
+   * Mouja deleteMany
+   */
+  export type MoujaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Moujas to delete
+     */
+    where?: MoujaWhereInput
+    /**
+     * Limit how many Moujas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Mouja without action
+   */
+  export type MoujaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mouja
+     */
+    select?: MoujaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Mouja
+     */
+    omit?: MoujaOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1884,6 +2955,16 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const MoujaScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MoujaScalarFieldEnum = (typeof MoujaScalarFieldEnum)[keyof typeof MoujaScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -1901,6 +2982,13 @@ export namespace Prisma {
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
@@ -1966,6 +3054,53 @@ export namespace Prisma {
     photo?: StringWithAggregatesFilter<"User"> | string
   }
 
+  export type MoujaWhereInput = {
+    AND?: MoujaWhereInput | MoujaWhereInput[]
+    OR?: MoujaWhereInput[]
+    NOT?: MoujaWhereInput | MoujaWhereInput[]
+    id?: StringFilter<"Mouja"> | string
+    name?: StringFilter<"Mouja"> | string
+    createdAt?: DateTimeFilter<"Mouja"> | Date | string
+    updatedAt?: DateTimeFilter<"Mouja"> | Date | string
+  }
+
+  export type MoujaOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MoujaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MoujaWhereInput | MoujaWhereInput[]
+    OR?: MoujaWhereInput[]
+    NOT?: MoujaWhereInput | MoujaWhereInput[]
+    name?: StringFilter<"Mouja"> | string
+    createdAt?: DateTimeFilter<"Mouja"> | Date | string
+    updatedAt?: DateTimeFilter<"Mouja"> | Date | string
+  }, "id">
+
+  export type MoujaOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MoujaCountOrderByAggregateInput
+    _max?: MoujaMaxOrderByAggregateInput
+    _min?: MoujaMinOrderByAggregateInput
+  }
+
+  export type MoujaScalarWhereWithAggregatesInput = {
+    AND?: MoujaScalarWhereWithAggregatesInput | MoujaScalarWhereWithAggregatesInput[]
+    OR?: MoujaScalarWhereWithAggregatesInput[]
+    NOT?: MoujaScalarWhereWithAggregatesInput | MoujaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Mouja"> | string
+    name?: StringWithAggregatesFilter<"Mouja"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Mouja"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Mouja"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
@@ -2020,6 +3155,55 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     photo?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MoujaCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MoujaUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MoujaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoujaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoujaCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MoujaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoujaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2077,8 +3261,58 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type MoujaCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MoujaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MoujaMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2121,6 +3355,31 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 

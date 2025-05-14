@@ -1,6 +1,6 @@
+import CreateMoujaForm from '@/components/create-mouja-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Page() {
@@ -14,21 +14,7 @@ export default function Page() {
       </div>
 
       {/* Form section */}
-      <div className="mb-8 rounded-sm border border-green-500 p-6">
-        <div className="space-y-4">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="mouza" className="font-medium">
-              মৌজা <span className="text-red-500">*</span>
-            </label>
-            <Input id="mouza" placeholder="মৌজা" className="w-full" />
-          </div>
-          <div>
-            <Button className="bg-green-600 text-white hover:bg-green-700">
-              নথি সংরক্ষণ
-            </Button>
-          </div>
-        </div>
-      </div>
+      <CreateMoujaForm />
 
       {/* Table section */}
       <div>

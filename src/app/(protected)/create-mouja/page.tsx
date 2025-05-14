@@ -1,9 +1,11 @@
 import CreateMoujaForm from '@/components/create-mouja-form';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { prisma } from '@/lib/db';
 import Link from 'next/link';
+import { format } from 'date-fns'
 
-export default function Page() {
+export default async function Page() {
+  const mouzaData = await prisma.mouja.findMany({ orderBy: { createdAt: 'desc' } });
+
   return (
     <div>
       {/* Header with back button */}
@@ -33,12 +35,12 @@ export default function Page() {
               </tr>
             </thead>
             <tbody>
-              {mouzaData.map(item => (
+              {mouzaData.map((item, index) => (
                 <tr key={item.id} className="border-b hover:bg-gray-50">
-                  <td className="p-3">{item.id}</td>
+                  <td className="p-3">{index + 1}</td>
                   <td className="p-3 text-green-600">{item.name}</td>
-                  <td className="p-3 text-green-600">{item.date}</td>
-                  <td className="p-3 text-green-600">{item.time}</td>
+                  <td className="p-3 text-green-600">{format(item.createdAt, 'MMM dd, yyyy')}</td>
+                  <td className="p-3 text-green-600">{format(item.createdAt, 'hh:mm a')}</td>
                   <td className="p-3">
                     <div className="flex gap-1">
                       <Link
@@ -63,35 +65,3 @@ export default function Page() {
   );
 }
 
-const mouzaData = [
-  {
-    id: 1,
-    name: 'হেমেনবাবাদ',
-    date: 'Feb 24, 2019',
-    time: '12:02:PM',
-  },
-  {
-    id: 2,
-    name: 'ছোট অর্জুনকান্দি',
-    date: 'Feb 24, 2019',
-    time: '12:02:PM',
-  },
-  {
-    id: 3,
-    name: 'ছোট অর্জুনকান্দি/ছদমুস',
-    date: 'Feb 24, 2019',
-    time: '12:02:PM',
-  },
-  {
-    id: 4,
-    name: 'ছদমুস/চিকনগর/মোমেনলা',
-    date: 'Feb 24, 2019',
-    time: '12:02:PM',
-  },
-  {
-    id: 5,
-    name: 'সোনাকান্দা/রুকুনপুর/আহাম্মদপুর',
-    date: 'Feb 24, 2019',
-    time: '12:02:PM',
-  },
-];

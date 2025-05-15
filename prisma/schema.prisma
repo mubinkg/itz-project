@@ -29,3 +29,19 @@ model Mouja {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Nothi {
+  id               String @id @default(cuid())
+  caseNo           String
+  caseNoSecondLine String
+  banglaYear       String
+  ownerName        String
+  parentOfOwner    String
+  address          String
+  saKhotian        String
+  saLine           String
+  rsKhotian        String
+  rsLine           String
+  quantity         String
+  type             String
+}

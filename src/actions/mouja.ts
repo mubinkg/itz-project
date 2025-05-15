@@ -19,7 +19,6 @@ export async function createMouja({ name }: {
         }
     }
     catch (err) {
-        console.log(err)
         return {
             success: false,
             message: "Error on creating mouja!"
@@ -44,7 +43,6 @@ export async function deleteMouja(id: string) {
         }
     }
     catch (err) {
-        console.log(err)
         return {
             success: false,
             message: "Error on deleting mouja!"

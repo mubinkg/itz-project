@@ -26,3 +26,25 @@ export async function createMouja({ name }: {
         }
     }
 }
+
+export async function deleteMouja(id: string) {
+    try {
+        const mouja = await prisma.mouja.delete({
+            where: {
+                id
+            }
+        })
+        return {
+            success: true,
+            data: mouja,
+            message: "Mouja deleted successfully!"
+        }
+    }
+    catch (err) {
+        console.log(err)
+        return {
+            success: false,
+            message: "Error on deleting mouja!"
+        }
+    }
+}

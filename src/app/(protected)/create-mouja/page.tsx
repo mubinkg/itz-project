@@ -2,9 +2,17 @@ import CreateMoujaForm from '@/components/create-mouja-form';
 import { prisma } from '@/lib/db';
 import Link from 'next/link';
 import { format } from 'date-fns'
+import Delete from '@/components/mouja/Delete';
 
 export default async function Page() {
-  const mouzaData = await prisma.mouja.findMany({ orderBy: { createdAt: 'desc' } });
+  const mouzaData = await prisma.mouja.findMany({
+    where: {
+      status: 'ACTIVE'
+    },
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
 
   return (
     <div>
@@ -50,9 +58,7 @@ export default async function Page() {
                         Edit
                       </Link>{' '}
                       |{' '}
-                      <Link href="#" className="text-red-500 hover:underline">
-                        Delete
-                      </Link>
+                      <Delete id={item.id} />
                     </div>
                   </td>
                 </tr>

@@ -25,6 +25,24 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 export type Mouja = $Result.DefaultSelection<Prisma.$MoujaPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Status: {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  DELETED: 'DELETED'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+}
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -1966,6 +1984,7 @@ export namespace Prisma {
   export type MoujaMinAggregateOutputType = {
     id: string | null
     name: string | null
+    status: $Enums.Status | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1973,6 +1992,7 @@ export namespace Prisma {
   export type MoujaMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    status: $Enums.Status | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1980,6 +2000,7 @@ export namespace Prisma {
   export type MoujaCountAggregateOutputType = {
     id: number
     name: number
+    status: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1989,6 +2010,7 @@ export namespace Prisma {
   export type MoujaMinAggregateInputType = {
     id?: true
     name?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1996,6 +2018,7 @@ export namespace Prisma {
   export type MoujaMaxAggregateInputType = {
     id?: true
     name?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2003,6 +2026,7 @@ export namespace Prisma {
   export type MoujaCountAggregateInputType = {
     id?: true
     name?: true
+    status?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2083,6 +2107,7 @@ export namespace Prisma {
   export type MoujaGroupByOutputType = {
     id: string
     name: string
+    status: $Enums.Status
     createdAt: Date
     updatedAt: Date
     _count: MoujaCountAggregateOutputType | null
@@ -2107,6 +2132,7 @@ export namespace Prisma {
   export type MoujaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["mouja"]>
@@ -2114,6 +2140,7 @@ export namespace Prisma {
   export type MoujaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["mouja"]>
@@ -2121,6 +2148,7 @@ export namespace Prisma {
   export type MoujaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["mouja"]>
@@ -2128,11 +2156,12 @@ export namespace Prisma {
   export type MoujaSelectScalar = {
     id?: boolean
     name?: boolean
+    status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MoujaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["mouja"]>
+  export type MoujaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["mouja"]>
 
   export type $MoujaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Mouja"
@@ -2140,6 +2169,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      status: $Enums.Status
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["mouja"]>
@@ -2567,6 +2597,7 @@ export namespace Prisma {
   interface MoujaFieldRefs {
     readonly id: FieldRef<"Mouja", 'String'>
     readonly name: FieldRef<"Mouja", 'String'>
+    readonly status: FieldRef<"Mouja", 'Status'>
     readonly createdAt: FieldRef<"Mouja", 'DateTime'>
     readonly updatedAt: FieldRef<"Mouja", 'DateTime'>
   }
@@ -2958,6 +2989,7 @@ export namespace Prisma {
   export const MoujaScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -2982,6 +3014,13 @@ export namespace Prisma {
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
     
 
 
@@ -3060,6 +3099,7 @@ export namespace Prisma {
     NOT?: MoujaWhereInput | MoujaWhereInput[]
     id?: StringFilter<"Mouja"> | string
     name?: StringFilter<"Mouja"> | string
+    status?: EnumStatusFilter<"Mouja"> | $Enums.Status
     createdAt?: DateTimeFilter<"Mouja"> | Date | string
     updatedAt?: DateTimeFilter<"Mouja"> | Date | string
   }
@@ -3067,6 +3107,7 @@ export namespace Prisma {
   export type MoujaOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3077,6 +3118,7 @@ export namespace Prisma {
     OR?: MoujaWhereInput[]
     NOT?: MoujaWhereInput | MoujaWhereInput[]
     name?: StringFilter<"Mouja"> | string
+    status?: EnumStatusFilter<"Mouja"> | $Enums.Status
     createdAt?: DateTimeFilter<"Mouja"> | Date | string
     updatedAt?: DateTimeFilter<"Mouja"> | Date | string
   }, "id">
@@ -3084,6 +3126,7 @@ export namespace Prisma {
   export type MoujaOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MoujaCountOrderByAggregateInput
@@ -3097,6 +3140,7 @@ export namespace Prisma {
     NOT?: MoujaScalarWhereWithAggregatesInput | MoujaScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Mouja"> | string
     name?: StringWithAggregatesFilter<"Mouja"> | string
+    status?: EnumStatusWithAggregatesFilter<"Mouja"> | $Enums.Status
     createdAt?: DateTimeWithAggregatesFilter<"Mouja"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Mouja"> | Date | string
   }
@@ -3160,6 +3204,7 @@ export namespace Prisma {
   export type MoujaCreateInput = {
     id?: string
     name: string
+    status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3167,6 +3212,7 @@ export namespace Prisma {
   export type MoujaUncheckedCreateInput = {
     id?: string
     name: string
+    status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3174,6 +3220,7 @@ export namespace Prisma {
   export type MoujaUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3181,6 +3228,7 @@ export namespace Prisma {
   export type MoujaUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3188,6 +3236,7 @@ export namespace Prisma {
   export type MoujaCreateManyInput = {
     id?: string
     name: string
+    status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3195,6 +3244,7 @@ export namespace Prisma {
   export type MoujaUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3202,6 +3252,7 @@ export namespace Prisma {
   export type MoujaUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3261,6 +3312,13 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -3275,6 +3333,7 @@ export namespace Prisma {
   export type MoujaCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3282,6 +3341,7 @@ export namespace Prisma {
   export type MoujaMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3289,8 +3349,19 @@ export namespace Prisma {
   export type MoujaMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3309,6 +3380,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3357,6 +3432,13 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -3366,6 +3448,16 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {

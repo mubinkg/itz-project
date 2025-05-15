@@ -125,6 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.MoujaScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -133,7 +134,11 @@ exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
-
+exports.Status = exports.$Enums.Status = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  DELETED: 'DELETED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

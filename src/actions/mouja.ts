@@ -29,9 +29,12 @@ export async function createMouja({ name }: {
 
 export async function deleteMouja(id: string) {
     try {
-        const mouja = await prisma.mouja.delete({
+        const mouja = await prisma.mouja.update({
             where: {
                 id
+            },
+            data: {
+                status: "DELETED"
             }
         })
         return {

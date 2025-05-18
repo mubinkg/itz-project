@@ -19,7 +19,6 @@ export default async function RootLayout({
       id: userId
     }
   })
-  console.log(user)
 
   return (
     <SidebarProvider>

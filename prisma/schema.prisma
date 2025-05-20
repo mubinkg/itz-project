@@ -45,6 +45,7 @@ model Nothi {
   banglaYear       String
   moujaId          String
   nothiOwner       NothiOwner[]
+  landSurvey       LandSurvey[]
 }
 
 model NothiOwner {
@@ -54,4 +55,16 @@ model NothiOwner {
   address     String
   nothi       Nothi  @relation(fields: [nothiId], references: [id])
   nothiId     String
+}
+
+model LandSurvey {
+  id       String @id @default(cuid())
+  saSurvey String
+  saLine   String
+  rsSurvey String
+  rsLine   String
+  quantiy  String
+  type     String
+  nothi    Nothi  @relation(fields: [nothiId], references: [id])
+  nothiId  String
 }

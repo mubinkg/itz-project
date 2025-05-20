@@ -22,11 +22,7 @@ export default async function Page() {
           মৌজা তৈরি করুন
         </h1>
       </div>
-
-      {/* Form section */}
       <CreateMoujaForm />
-
-      {/* Table section */}
       <div>
         <div className="bg-green-600 p-3 text-lg font-medium text-white">
           মৌজার তালিকা

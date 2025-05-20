@@ -38,10 +38,20 @@ model Mouja {
 }
 
 model Nothi {
-  id               String @id @default(cuid())
-  mouja            Mouja  @relation(fields: [moujaId], references: [id])
+  id               String       @id @default(cuid())
+  mouja            Mouja        @relation(fields: [moujaId], references: [id])
   caseNo           String
   caseNoSecondLine String
   banglaYear       String
   moujaId          String
+  NothiOvibabok    NothiOwner[]
+}
+
+model NothiOwner {
+  id          String @id @default(cuid())
+  ownerName   String
+  gurdianName String
+  address     String
+  nothi       Nothi  @relation(fields: [nothiId], references: [id])
+  nothiId     String
 }

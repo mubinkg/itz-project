@@ -15,18 +15,18 @@ import { prisma } from '@/lib/db';
 export default async function Page() {
   const mouzaData = await prisma.mouja.findMany({
     where: {
-      status: 'ACTIVE'
+      status: 'ACTIVE',
     },
     orderBy: {
-      createdAt: 'desc'
-    }
+      createdAt: 'desc',
+    },
   });
 
   const nothiList = await prisma.nothi.findMany({
     include: {
-      nothiOwner: true
-    }
-  })
+      nothiOwner: true,
+    },
+  });
 
   return (
     <div>
@@ -52,48 +52,49 @@ export default async function Page() {
             </tr>
           </thead>
           <tbody>
-            {
-              nothiList.map(nothi => (
-                <tr key={nothi.id} className="border-b">
-                  <td className="p-3 whitespace-nowrap">{nothi.caseNo}</td>
-                  <td className="p-3 whitespace-nowrap">{nothi.banglaYear}</td>
-                  <td className="p-3">
-                    <CreateOwner nothiId={nothi.id} previousOwners={nothi.nothiOwner} />
-                  </td>
-                  <td className="p-3">
-                    <Input placeholder="SA খতিয়ান" className="w-full" />
-                  </td>
-                  <td className="p-3">
-                    <Input placeholder="SA দাগ" className="w-full" />
-                  </td>
-                  <td className="p-3">
-                    <Input placeholder="RS খতিয়ান" className="w-full" />
-                  </td>
-                  <td className="p-3">
-                    <Input placeholder="RS দাগ" className="w-full" />
-                  </td>
-                  <td className="p-3">
-                    <Input placeholder="পরিমাণ" className="w-full" />
-                  </td>
-                  <td className="p-3">
-                    <Select>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="খাস" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="খাস">খাস</SelectItem>
-                        <SelectItem value="অন্যান্য">অন্যান্য</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <div className="mt-2">
-                      <Button className="w-full bg-green-600 hover:bg-green-700">
-                        সংরক্ষণ
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            }
+            {nothiList.map(nothi => (
+              <tr key={nothi.id} className="border-b">
+                <td className="p-3 whitespace-nowrap">{nothi.caseNo}</td>
+                <td className="p-3 whitespace-nowrap">{nothi.banglaYear}</td>
+                <td className="p-3">
+                  <CreateOwner
+                    nothiId={nothi.id}
+                    previousOwners={nothi.nothiOwner}
+                  />
+                </td>
+                <td className="p-3">
+                  <Input placeholder="SA খতিয়ান" className="w-full" />
+                </td>
+                <td className="p-3">
+                  <Input placeholder="SA দাগ" className="w-full" />
+                </td>
+                <td className="p-3">
+                  <Input placeholder="RS খতিয়ান" className="w-full" />
+                </td>
+                <td className="p-3">
+                  <Input placeholder="RS দাগ" className="w-full" />
+                </td>
+                <td className="p-3">
+                  <Input placeholder="পরিমাণ" className="w-full" />
+                </td>
+                <td className="p-3">
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="খাস" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="খাস">খাস</SelectItem>
+                      <SelectItem value="অন্যান্য">অন্যান্য</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <div className="mt-2">
+                    <Button className="w-full bg-green-600 hover:bg-green-700">
+                      সংরক্ষণ
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

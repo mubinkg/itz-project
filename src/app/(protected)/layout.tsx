@@ -12,13 +12,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies()
-  const userId = cookieStore.get('user')?.value
+  const cookieStore = await cookies();
+  const userId = cookieStore.get('user')?.value;
   const user = await prisma.user.findUnique({
     where: {
-      id: userId
-    }
-  })
+      id: userId,
+    },
+  });
 
   return (
     <SidebarProvider>

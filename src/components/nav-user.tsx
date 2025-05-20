@@ -20,11 +20,7 @@ import { useRouter } from 'next/navigation';
 import { logout } from '@/actions/auth';
 import { User } from '@/generated/prisma';
 
-export function NavUser({
-  user,
-}: {
-  user: User | null;
-}) {
+export function NavUser({ user }: { user: User | null }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
   return (

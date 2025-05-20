@@ -20,9 +20,8 @@ import {
 } from "@/components/ui/popover"
 import { Mouja } from "@/generated/prisma"
 
-export function MoujaSelect({ mouzaData }: { mouzaData: Mouja[] }) {
+export function MoujaSelect({ mouzaData, value, setValue }: { mouzaData: Mouja[], value: any, setValue: any }) {
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
     const frameworks = mouzaData.map(mouja => ({ label: mouja.name, value: mouja.id }));
 
     return (

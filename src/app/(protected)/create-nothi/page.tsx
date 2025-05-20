@@ -1,4 +1,5 @@
 import { MoujaSelect } from '@/components/mouja/MoujaSelect';
+import CreateNothi from '@/components/nothi/CreateNothi';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -20,77 +21,14 @@ export default async function Page() {
     }
   });
 
+  const nothiList = await prisma.nothi.findMany({})
+
   return (
     <div>
-      {/* Header */}
       <h1 className="mb-8 text-center text-2xl font-semibold">
         মৌজার নথি তৈরি করুন
       </h1>
-
-      {/* Form Section */}
-      <div className="mb-8 space-y-6">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="flex items-center">
-            <label htmlFor="caseFileNo" className="mr-2 whitespace-nowrap">
-              মৌজা <span className="text-green-500">*</span>
-            </label>
-          </div>
-          <div className="col-span-2">
-            <MoujaSelect mouzaData={mouzaData} />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="flex items-center">
-            <label htmlFor="caseFileNo" className="mr-2 whitespace-nowrap">
-              কেস নথি নং <span className="text-green-500">*</span>
-            </label>
-          </div>
-          <div className="col-span-2">
-            <Input
-              id="caseFileNo"
-              placeholder="কেস নথি নং"
-              className="w-full"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="flex items-center">
-            <label
-              htmlFor="caseFileNoSecondLine"
-              className="mr-2 whitespace-nowrap"
-            >
-              কেস নথি নং দ্বিতীয় লাইন
-            </label>
-          </div>
-          <div className="col-span-2">
-            <Input
-              id="caseFileNoSecondLine"
-              placeholder="৮৯"
-              defaultValue="৮৯"
-              className="w-full"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="flex items-center">
-            <label htmlFor="bengaliYear" className="mr-2 whitespace-nowrap">
-              বাংলা সন
-            </label>
-          </div>
-          <div className="col-span-2">
-            <Input id="bengaliYear" placeholder="বাংলা সন" className="w-full" />
-          </div>
-        </div>
-
-        <div className="flex gap-4">
-          <Button className="bg-blue-700 hover:bg-blue-800">নথি সংরক্ষণ</Button>
-          <Button variant="destructive">Refresh</Button>
-        </div>
-      </div>
-
-      {/* Table Section */}
+      <CreateNothi mouzaData={mouzaData} />
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
@@ -109,51 +47,55 @@ export default async function Page() {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b">
-              <td className="p-3 whitespace-nowrap">৩৪৫</td>
-              <td className="p-3 whitespace-nowrap">১৪২৫</td>
-              <td className="p-3">
-                <div className="space-y-2">
-                  <Input placeholder="মালিকের নাম" className="w-full" />
-                  <Input placeholder="অভিভাবকের" className="w-full" />
-                  <Input placeholder="ঠিকানা" className="w-full" />
-                  <Button className="bg-green-600 hover:bg-green-700">
-                    সংরক্ষণ
-                  </Button>
-                </div>
-              </td>
-              <td className="p-3">
-                <Input placeholder="SA খতিয়ান" className="w-full" />
-              </td>
-              <td className="p-3">
-                <Input placeholder="SA দাগ" className="w-full" />
-              </td>
-              <td className="p-3">
-                <Input placeholder="RS খতিয়ান" className="w-full" />
-              </td>
-              <td className="p-3">
-                <Input placeholder="RS দাগ" className="w-full" />
-              </td>
-              <td className="p-3">
-                <Input placeholder="পরিমাণ" className="w-full" />
-              </td>
-              <td className="p-3">
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="খাস" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="খাস">খাস</SelectItem>
-                    <SelectItem value="অন্যান্য">অন্যান্য</SelectItem>
-                  </SelectContent>
-                </Select>
-                <div className="mt-2">
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
-                    সংরক্ষণ
-                  </Button>
-                </div>
-              </td>
-            </tr>
+            {
+              nothiList.map(nothi => (
+                <tr key={nothi.id} className="border-b">
+                  <td className="p-3 whitespace-nowrap">{nothi.caseNo}</td>
+                  <td className="p-3 whitespace-nowrap">{nothi.banglaYear}</td>
+                  <td className="p-3">
+                    <div className="space-y-2">
+                      <Input placeholder="মালিকের নাম" className="w-full" />
+                      <Input placeholder="অভিভাবকের" className="w-full" />
+                      <Input placeholder="ঠিকানা" className="w-full" />
+                      <Button className="bg-green-600 hover:bg-green-700">
+                        সংরক্ষণ
+                      </Button>
+                    </div>
+                  </td>
+                  <td className="p-3">
+                    <Input placeholder="SA খতিয়ান" className="w-full" />
+                  </td>
+                  <td className="p-3">
+                    <Input placeholder="SA দাগ" className="w-full" />
+                  </td>
+                  <td className="p-3">
+                    <Input placeholder="RS খতিয়ান" className="w-full" />
+                  </td>
+                  <td className="p-3">
+                    <Input placeholder="RS দাগ" className="w-full" />
+                  </td>
+                  <td className="p-3">
+                    <Input placeholder="পরিমাণ" className="w-full" />
+                  </td>
+                  <td className="p-3">
+                    <Select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="খাস" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="খাস">খাস</SelectItem>
+                        <SelectItem value="অন্যান্য">অন্যান্য</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <div className="mt-2">
+                      <Button className="w-full bg-green-600 hover:bg-green-700">
+                        সংরক্ষণ
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>

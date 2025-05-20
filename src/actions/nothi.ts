@@ -25,3 +25,27 @@ export async function createNothi({ moujaId, caseNo, caseNoSecondLine, banglaYea
         }
     }
 }
+
+export async function nothiOwner({ nothiId, ownerName, gurdianName, address }: { ownerName: string, gurdianName: string, address: string, nothiId: string }) {
+    try {
+        const mouja = await prisma.nothiOwner.create({
+            data: {
+                nothiId,
+                ownerName,
+                gurdianName,
+                address
+            }
+        })
+        return {
+            success: true,
+            data: mouja,
+            message: "Nothi owner created successfully!"
+        }
+    }
+    catch (err) {
+        return {
+            success: false,
+            message: "Error on creating nothi owner!"
+        }
+    }
+}

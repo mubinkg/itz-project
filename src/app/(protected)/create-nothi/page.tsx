@@ -1,5 +1,6 @@
 import { MoujaSelect } from '@/components/mouja/MoujaSelect';
 import CreateNothi from '@/components/nothi/CreateNothi';
+import CreateOwner from '@/components/nothi/CreateOwner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -21,7 +22,11 @@ export default async function Page() {
     }
   });
 
-  const nothiList = await prisma.nothi.findMany({})
+  const nothiList = await prisma.nothi.findMany({
+    include: {
+      nothiOwner: true
+    }
+  })
 
   return (
     <div>
@@ -53,14 +58,7 @@ export default async function Page() {
                   <td className="p-3 whitespace-nowrap">{nothi.caseNo}</td>
                   <td className="p-3 whitespace-nowrap">{nothi.banglaYear}</td>
                   <td className="p-3">
-                    <div className="space-y-2">
-                      <Input placeholder="মালিকের নাম" className="w-full" />
-                      <Input placeholder="অভিভাবকের" className="w-full" />
-                      <Input placeholder="ঠিকানা" className="w-full" />
-                      <Button className="bg-green-600 hover:bg-green-700">
-                        সংরক্ষণ
-                      </Button>
-                    </div>
+                    <CreateOwner nothiId={nothi.id} previousOwners={nothi.nothiOwner} />
                   </td>
                   <td className="p-3">
                     <Input placeholder="SA খতিয়ান" className="w-full" />

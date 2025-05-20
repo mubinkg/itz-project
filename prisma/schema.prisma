@@ -44,7 +44,7 @@ model Nothi {
   caseNoSecondLine String
   banglaYear       String
   moujaId          String
-  NothiOvibabok    NothiOwner[]
+  nothiOwner       NothiOwner[]
 }
 
 model NothiOwner {

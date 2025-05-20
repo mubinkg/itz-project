@@ -1,3 +1,4 @@
+import { MoujaSelect } from '@/components/mouja/MoujaSelect';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -18,6 +19,16 @@ export default function Page() {
 
       {/* Form Section */}
       <div className="mb-8 space-y-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="flex items-center">
+            <label htmlFor="caseFileNo" className="mr-2 whitespace-nowrap">
+              মৌজা <span className="text-green-500">*</span>
+            </label>
+          </div>
+          <div className="col-span-2">
+            <MoujaSelect />
+          </div>
+        </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div className="flex items-center">
             <label htmlFor="caseFileNo" className="mr-2 whitespace-nowrap">

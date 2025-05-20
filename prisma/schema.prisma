@@ -34,20 +34,14 @@ model Mouja {
   status    Status   @default(ACTIVE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Nothi     Nothi[]
 }
 
 model Nothi {
   id               String @id @default(cuid())
+  mouja            Mouja  @relation(fields: [moujaId], references: [id])
   caseNo           String
   caseNoSecondLine String
   banglaYear       String
-  ownerName        String
-  parentOfOwner    String
-  address          String
-  saKhotian        String
-  saLine           String
-  rsKhotian        String
-  rsLine           String
-  quantity         String
-  type             String
+  moujaId          String
 }

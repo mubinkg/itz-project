@@ -52,23 +52,6 @@ export default function LandOffice() {
             </SelectContent>
           </Select>
         </Card>
-
-        <Card className="flex-1 border-2 border-green-500 p-4">
-          <div className="mb-2 font-medium">রেকর্ড এর ধরন</div>
-          <Select>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="এস.এ" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="এস.এ">এস.এ</SelectItem>
-                <SelectItem value="আর.এস">আর.এস</SelectItem>
-                <SelectItem value="বি.এস">বি.এস</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </Card>
-
         <Card className="flex-1 border-2 border-green-500 p-4">
           <div className="mb-2 font-medium">দাগ নং</div>
           <div className="flex gap-2">

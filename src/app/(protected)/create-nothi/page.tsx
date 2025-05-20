@@ -8,8 +8,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { prisma } from '@/lib/db';
 
-export default function Page() {
+export default async function Page() {
+  const mouzaData = await prisma.mouja.findMany({
+    where: {
+      status: 'ACTIVE'
+    },
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+
   return (
     <div>
       {/* Header */}
@@ -26,7 +36,7 @@ export default function Page() {
             </label>
           </div>
           <div className="col-span-2">
-            <MoujaSelect />
+            <MoujaSelect mouzaData={mouzaData} />
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

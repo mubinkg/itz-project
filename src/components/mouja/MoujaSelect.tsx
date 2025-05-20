@@ -18,33 +18,12 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { Mouja } from "@/generated/prisma"
 
-const frameworks = [
-    {
-        value: "next.js",
-        label: "Next.js",
-    },
-    {
-        value: "sveltekit",
-        label: "SvelteKit",
-    },
-    {
-        value: "nuxt.js",
-        label: "Nuxt.js",
-    },
-    {
-        value: "remix",
-        label: "Remix",
-    },
-    {
-        value: "astro",
-        label: "Astro",
-    },
-]
-
-export function MoujaSelect() {
+export function MoujaSelect({ mouzaData }: { mouzaData: Mouja[] }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
+    const frameworks = mouzaData.map(mouja => ({ label: mouja.name, value: mouja.id }));
 
     return (
         <Popover open={open} onOpenChange={setOpen}>

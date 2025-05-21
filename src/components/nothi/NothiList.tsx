@@ -16,7 +16,7 @@ const NothiList = ({ nothiList }: { nothiList: Record<string, any>[] }) => {
                     <td className="p-3">
                         <CreateOwner nothiId={nothi.id} previousOwners={nothi.nothiOwner} />
                     </td>
-                    <CreateSurvey nothiId={nothi.id} />
+                    <CreateSurvey nothiId={nothi.id} landSurvey={nothi.landSurvey} />
                 </tr>
             ))}
         </tbody>

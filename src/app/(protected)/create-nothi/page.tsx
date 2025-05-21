@@ -26,6 +26,7 @@ export default async function Page() {
   const nothiList = await prisma.nothi.findMany({
     include: {
       nothiOwner: true,
+      landSurvey: true,
     },
   });
 

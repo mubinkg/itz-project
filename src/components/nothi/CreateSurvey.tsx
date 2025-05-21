@@ -13,7 +13,8 @@ import { Button } from '../ui/button';
 import { createSurvey } from '@/actions/nothi';
 import { useRouter } from 'next/navigation';
 
-const CreateSurvey = ({ nothiId }: { nothiId: string }) => {
+const CreateSurvey = ({ nothiId, landSurvey }: { nothiId: string, landSurvey: Record<string, any>[] }) => {
+    console.log(landSurvey);
     const router = useRouter()
     const [saSurvey, setSaSurvey] = useState('')
     const [saLine, setSaLine] = useState('')

@@ -2,8 +2,12 @@ import DashboardFilter from '@/components/dashboard/DashboardFilter';
 import ResultsTable from '@/components/results/ResultsTable';
 import { prisma } from '@/lib/db';
 
-export default async function LandOffice({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-  const params = await searchParams
+export default async function LandOffice({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
   const nothiList = await prisma.nothi.findMany({
     include: {
       nothiOwner: true,

@@ -1,4 +1,5 @@
 import DashboardFilter from '@/components/dashboard/DashboardFilter';
+import ResultsTable from '@/components/results/ResultsTable';
 import { prisma } from '@/lib/db';
 
 export default async function LandOffice({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
@@ -25,13 +26,9 @@ export default async function LandOffice({ searchParams }: { searchParams: Promi
         <h2 className="mt-1 text-xl">উপজেলা ভূমি অফিস</h2>
         <h3 className="mt-1 text-lg">শিবগঞ্জ, চাঁপাইনবাবগঞ্জ</h3>
       </div>
-
       <DashboardFilter mouzaData={mouzaData} />
-
       <div className="mb-1 h-12 w-full bg-green-600"></div>
-      <div className="flex h-96 w-full items-center justify-center bg-gray-200">
-        <div className="text-5xl text-gray-500">!</div>
-      </div>
+      <ResultsTable />
     </div>
   );
 }

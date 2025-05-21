@@ -1,8 +1,15 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ResultsTable from '@/components/results/ResultsTable';
+import { prisma } from '@/lib/db';
 
-export default function Page() {
+export default async function Page() {
+  const nothiList = await prisma.nothi.findMany({
+    include: {
+      nothiOwner: true,
+      landSurvey: true,
+    },
+  });
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Header */}
@@ -29,7 +36,7 @@ export default function Page() {
         <Button variant="destructive">Refresh</Button>
       </div>
 
-      <ResultsTable />
+      <ResultsTable nothiList={nothiList} />
     </div>
   );
 }

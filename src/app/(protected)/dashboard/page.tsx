@@ -28,7 +28,7 @@ export default async function LandOffice({ searchParams }: { searchParams: Promi
       </div>
       <DashboardFilter mouzaData={mouzaData} />
       <div className="mb-1 h-12 w-full bg-green-600"></div>
-      <ResultsTable />
+      <ResultsTable nothiList={nothiList} />
     </div>
   );
 }

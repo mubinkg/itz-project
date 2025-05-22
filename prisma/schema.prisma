@@ -8,12 +8,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String @id @default(cuid())
-  name     String
-  email    String
-  password String
-  photo    String
+enum Role {
+  ADMIN
+  USER
 }
 
 enum Status {
@@ -22,15 +19,19 @@ enum Status {
   DELETED
 }
 
-enum Role {
-  ADMIN
-  USER
+model User {
+  id       String @id @default(cuid())
+  name     String
+  email    String
+  password String
+  photo    String
+  role     Role   @default(USER)
 }
 
 model Mouja {
   id        String   @id @default(cuid())
   name      String
-  role      Role     @default(USER)
+  jlNo      String
   status    Status   @default(ACTIVE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -39,35 +40,24 @@ model Mouja {
 }
 
 model Nothi {
-  id               String       @id @default(cuid())
-  mouja            Mouja        @relation(fields: [moujaId], references: [id])
-  caseNo           String
-  caseNoSecondLine String
-  banglaYear       String
-  moujaId          String
-  nothiOwner       NothiOwner[]
-  landSurvey       LandSurvey[]
-}
-
-model NothiOwner {
-  id          String @id @default(cuid())
-  ownerName   String
-  gurdianName String
+  id          String   @id @default(cuid())
+  mouja       Mouja    @relation(fields: [moujaId], references: [id])
+  moujaId     String
+  caseNo      String
+  khotianNo   String
+  lineNo      String
+  quantity    String
+  landType    String
+  comment     String
+  caseInfo    String
+  name        String
+  parentName  String
   address     String
-  nothi       Nothi  @relation(fields: [nothiId], references: [id])
-  nothiId     String
-}
-
-model LandSurvey {
-  id       String @id @default(cuid())
-  saSurvey String
-  saLine   String
-  rsSurvey String
-  rsLine   String
-  quantiy  String
-  type     String
-  nothi    Nothi  @relation(fields: [nothiId], references: [id])
-  nothiId  String
+  mobile      String
+  renewalDate DateTime
+  status      Status   @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Abandoned {

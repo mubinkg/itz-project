@@ -9,9 +9,8 @@ export default async function LandOffice({
 }) {
   const params = await searchParams;
   const nothiList = await prisma.nothi.findMany({
-    include: {
-      nothiOwner: true,
-      landSurvey: true,
+    orderBy: {
+      createdAt: 'desc',
     },
   });
   const mouzaData = await prisma.mouja.findMany({

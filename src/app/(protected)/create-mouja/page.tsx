@@ -33,6 +33,7 @@ export default async function Page() {
               <tr className="border-b">
                 <th className="p-3 text-left">#</th>
                 <th className="p-3 text-left">মৌজার নাম</th>
+                <th className="p-3 text-left">জে.এল. নং</th>
                 <th className="p-3 text-left">দিন</th>
                 <th className="p-3 text-left">সময়</th>
                 <th className="p-3 text-left">Action</th>
@@ -43,6 +44,7 @@ export default async function Page() {
                 <tr key={item.id} className="border-b hover:bg-gray-50">
                   <td className="p-3">{index + 1}</td>
                   <td className="p-3 text-green-600">{item.name}</td>
+                  <td className="p-3 text-green-600">{item.jlNo}</td>
                   <td className="p-3 text-green-600">
                     {format(item.createdAt, 'MMM dd, yyyy')}
                   </td>
@@ -51,13 +53,7 @@ export default async function Page() {
                   </td>
                   <td className="p-3">
                     <div className="flex gap-1">
-                      <Link
-                        href="/create-nothi"
-                        className="text-blue-500 hover:underline"
-                      >
-                        Edit
-                      </Link>{' '}
-                      | <Delete id={item.id} />
+                      <Delete id={item.id} />
                     </div>
                   </td>
                 </tr>

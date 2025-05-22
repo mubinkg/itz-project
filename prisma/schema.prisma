@@ -35,6 +35,7 @@ model Mouja {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Nothi     Nothi[]
+  Abandoned Abandoned[]
 }
 
 model Nothi {
@@ -67,4 +68,19 @@ model LandSurvey {
   type     String
   nothi    Nothi  @relation(fields: [nothiId], references: [id])
   nothiId  String
+}
+
+model Abandoned {
+  id                        String       @id @default(cuid())
+  mouja                     Mouja        @relation(fields: [moujaId], references: [id])
+  moujaId                   String
+  upazila                   String
+  village                   String
+  dagNo                     String
+  dagLandSize               String
+  dateOfRegistration        String
+  dateOfInspection          String
+  settlementCaseDateBook12  String
+  comment                   String
+  createdAt                 DateTime     @default(now())
 }

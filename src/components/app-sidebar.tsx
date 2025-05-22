@@ -37,6 +37,11 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         icon: Bot,
       },
       {
+        title: 'পরিত্যক্ত সম্পত্তি তৈরি করুন',
+        url: '/create-abandoned-property',
+        icon: Bot,
+      },
+      {
         title: 'দাগ নং এর তালিকা',
         url: '/plot-list',
         icon: BookOpen,

@@ -10,6 +10,24 @@ import { useRouter } from 'next/navigation';
 import { upazilaList } from '@/lib/upazila-list';
 import { createAbandoned, updateAbandoned } from '@/actions/abandoned';
 
+// Helper to format YYYY-MM-DD to dd/mm/YYYY
+const formatDate = (dateStr: string) => {
+  if (!dateStr) return '';
+  const [year, month, day] = dateStr.split('-');
+  return `${day}/${month}/${year}`;
+};
+
+// Helper to format YYYY-MM-DD to "1 Jun 2025"
+const formatDateLong = (dateStr: string) => {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+};
+
 const CreateAbandonedProperty = ({
   mouzaData,
   editData,
@@ -148,6 +166,11 @@ const CreateAbandonedProperty = ({
         </div>
         <div className="col-span-2">
           <Input type="date" value={dateOfRegistration} onChange={e => setDateOfRegistration(e.target.value)} className="w-full" />
+          {dateOfRegistration && (
+            <div className="text-xs text-yellow-600 mt-1">
+              নিবন্ধনের তারিখ: {formatDateLong(dateOfRegistration)}
+            </div>
+          )}
         </div>
       </div>
       {/* Date of Inspection */}
@@ -157,6 +180,11 @@ const CreateAbandonedProperty = ({
         </div>
         <div className="col-span-2">
           <Input type="date" value={dateOfInspection} onChange={e => setDateOfInspection(e.target.value)} className="w-full" />
+          {dateOfInspection && (
+            <div className="text-xs text-yellow-600 mt-1">
+              পরিদর্শনের তারিখ: {formatDateLong(dateOfInspection)}
+            </div>
+          )}
         </div>
       </div>
       {/* Settlement Case Date Book-12 */}

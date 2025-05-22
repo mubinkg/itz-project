@@ -37,8 +37,16 @@ const AbandonedPropertyList = ({
             <td className="p-3 whitespace-nowrap">{abandoned.village}</td>
             <td className="p-3 whitespace-nowrap">{abandoned.dagNo}</td>
             <td className="p-3 whitespace-nowrap">{abandoned.dagLandSize}</td>
-            <td className="p-3 whitespace-nowrap">{abandoned.dateOfRegistration}</td>
-            <td className="p-3 whitespace-nowrap">{abandoned.dateOfInspection}</td>
+            <td className="p-3 whitespace-nowrap">
+              {abandoned.dateOfRegistration
+                ? new Date(abandoned.dateOfRegistration).toLocaleDateString('bn-BD')
+                : ''}  
+            </td>
+            <td className="p-3 whitespace-nowrap">
+              {abandoned.dateOfInspection
+                ? new Date(abandoned.dateOfInspection).toLocaleDateString('bn-BD')
+                : ''}  
+            </td>
             <td className="p-3 whitespace-nowrap">{abandoned.settlementCaseDateBook12}</td>
             <td className="p-3 whitespace-nowrap">{abandoned.comment}</td>
             <td className="p-3 whitespace-nowrap">

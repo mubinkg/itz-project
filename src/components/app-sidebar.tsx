@@ -32,7 +32,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         isActive: true,
       },
       {
-        title: 'মৌজার নাথ তৈরি করুন',
+        title: 'মৌজার নথি তৈরি করুন',
         url: '/create-nothi',
         icon: Bot,
       },
@@ -41,11 +41,11 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         url: '/create-abandoned-property',
         icon: Bot,
       },
-      {
-        title: 'দাগ নং এর তালিকা',
-        url: '/plot-list',
-        icon: BookOpen,
-      },
+      // {
+      //   title: 'দাগ নং এর তালিকা',
+      //   url: '/plot-list',
+      //   icon: BookOpen,
+      // },
     ],
   };
 

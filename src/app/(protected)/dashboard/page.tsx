@@ -13,6 +13,9 @@ export default async function LandOffice({
       nothiOwner: true,
       landSurvey: true,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
   const mouzaData = await prisma.mouja.findMany({
     where: {

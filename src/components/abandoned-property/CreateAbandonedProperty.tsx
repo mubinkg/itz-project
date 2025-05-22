@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MoujaSelect } from '../mouja/MoujaSelect';
 import { UpazilaSelect } from '../upazila/UpazilaSelect';
 import { Input } from '../ui/input';
@@ -8,9 +8,17 @@ import { Button } from '../ui/button';
 import { Mouja } from '@/generated/prisma';
 import { useRouter } from 'next/navigation';
 import { upazilaList } from '@/lib/upazila-list';
-import { createAbandoned } from '@/actions/abandoned';
+import { createAbandoned, updateAbandoned } from '@/actions/abandoned';
 
-const CreateAbandonedProperty = ({ mouzaData }: { mouzaData: Mouja[] }) => {
+const CreateAbandonedProperty = ({
+  mouzaData,
+  editData,
+  onFinishEdit,
+}: {
+  mouzaData: Mouja[];
+  editData?: Record<string, any> | null;
+  onFinishEdit?: () => void;
+}) => {
   const router = useRouter();
   const [moujaId, setMouja] = useState('');
   const [upazila, setUpazila] = useState('');
@@ -21,9 +29,73 @@ const CreateAbandonedProperty = ({ mouzaData }: { mouzaData: Mouja[] }) => {
   const [dateOfInspection, setDateOfInspection] = useState('');
   const [settlementCaseDateBook12, setSettlementCaseDateBook12] = useState('');
   const [comment, setComment] = useState('');
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (editData) {
+      setEditingId(editData.id);
+      setMouja(editData.moujaId || '');
+      setUpazila(editData.upazila || '');
+      setVillage(editData.village || '');
+      setDagNo(editData.dagNo || '');
+      setDagLandSize(editData.dagLandSize || '');
+      setDateOfRegistration(editData.dateOfRegistration || '');
+      setDateOfInspection(editData.dateOfInspection || '');
+      setSettlementCaseDateBook12(editData.settlementCaseDateBook12 || '');
+      setComment(editData.comment || '');
+    } else {
+      setEditingId(null);
+      setMouja('');
+      setUpazila('');
+      setVillage('');
+      setDagNo('');
+      setDagLandSize('');
+      setDateOfRegistration('');
+      setDateOfInspection('');
+      setSettlementCaseDateBook12('');
+      setComment('');
+    }
+  }, [editData]);
+
+  const handleSubmit = async () => {
+    if (editingId) {
+      await updateAbandoned({
+        id: editingId,
+        moujaId,
+        upazila,
+        village,
+        dagNo,
+        dagLandSize,
+        dateOfRegistration,
+        dateOfInspection,
+        settlementCaseDateBook12,
+        comment,
+      });
+      if (onFinishEdit) onFinishEdit();
+    } else {
+      await createAbandoned({
+        moujaId,
+        upazila,
+        village,
+        dagNo,
+        dagLandSize,
+        dateOfRegistration,
+        dateOfInspection,
+        settlementCaseDateBook12,
+        comment,
+      });
+      if (onFinishEdit) onFinishEdit();
+    }
+  };
 
   return (
-    <div className="mb-8 space-y-6">
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="space-y-6"
+    >
       {/* Mouja */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div className="flex items-center">
@@ -108,40 +180,16 @@ const CreateAbandonedProperty = ({ mouzaData }: { mouzaData: Mouja[] }) => {
       {/* Submit */}
       <div className="flex gap-4 flex-wrap justify-end">
         <Button
+          type="submit"
           className="bg-green-700 hover:bg-green-800"
-          onClick={async () => {
-            try {
-              await createAbandoned({
-                moujaId,
-                upazila,
-                village,
-                dagNo,
-                dagLandSize,
-                dateOfRegistration,
-                dateOfInspection,
-                settlementCaseDateBook12,
-                comment,
-              });
-              router.refresh();
-              setMouja('');
-              setUpazila('');
-              setVillage('');
-              setDagNo('');
-              setDagLandSize('');
-              setDateOfRegistration('');
-              setDateOfInspection('');
-              setSettlementCaseDateBook12('');
-              setComment('');
-            } catch (err) {
-              console.log(err);
-            }
-          }}
         >
-          সংরক্ষণ করুন
+          {editingId ? 'আপডেট করুন' : 'সংরক্ষণ করুন'}
         </Button>
         <Button
+          type="button"
           variant="destructive"
           onClick={() => {
+            setEditingId(null);
             setMouja('');
             setUpazila('');
             setVillage('');
@@ -151,12 +199,13 @@ const CreateAbandonedProperty = ({ mouzaData }: { mouzaData: Mouja[] }) => {
             setDateOfInspection('');
             setSettlementCaseDateBook12('');
             setComment('');
+            if (onFinishEdit) onFinishEdit();
           }}
         >
           Refresh
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 

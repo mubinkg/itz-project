@@ -50,6 +50,45 @@ export async function createAbandoned({
   }
 }
 
+export async function updateAbandoned({
+  id,
+  moujaId,
+  upazila,
+  village,
+  dagNo,
+  dagLandSize,
+  dateOfRegistration,
+  dateOfInspection,
+  settlementCaseDateBook12,
+  comment,
+}: {
+  id: string;
+  moujaId: string;
+  upazila: string;
+  village: string;
+  dagNo: string;
+  dagLandSize: string;
+  dateOfRegistration: string;
+  dateOfInspection: string;
+  settlementCaseDateBook12: string;
+  comment: string;
+}) {
+  return prisma.abandoned.update({
+    where: { id },
+    data: {
+      moujaId,
+      upazila,
+      village,
+      dagNo,
+      dagLandSize,
+      dateOfRegistration,
+      dateOfInspection,
+      settlementCaseDateBook12,
+      comment,
+    },
+  });
+}
+
 export async function nothiOwner({
   nothiId,
   ownerName,

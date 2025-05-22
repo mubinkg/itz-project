@@ -50,7 +50,7 @@ export function MoujaSelect({
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-[100%] p-0">
         <Command>
           <CommandInput placeholder="Search framework..." className="h-9" />
           <CommandList>

@@ -27,7 +27,7 @@ export default async function Page() {
     include: {
       nothiOwner: true,
       landSurvey: true,
-    },
+    }
   });
 
   return (

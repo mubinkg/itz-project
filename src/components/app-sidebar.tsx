@@ -32,7 +32,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         isActive: true,
       },
       {
-        title: 'মৌজার নাথ তৈরি করুন',
+        title: 'মৌজার নথি তৈরি করুন',
         url: '/create-nothi',
         icon: Bot,
       },

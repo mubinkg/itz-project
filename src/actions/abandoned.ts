@@ -89,6 +89,15 @@ export async function updateAbandoned({
   });
 }
 
+export async function deleteAbandoned(id: string) {
+  try {
+    await prisma.abandoned.delete({ where: { id } });
+    return { success: true, message: 'Abandoned property deleted successfully!' };
+  } catch (err) {
+    return { success: false, message: 'Error deleting abandoned property!' };
+  }
+}
+
 export async function nothiOwner({
   nothiId,
   ownerName,

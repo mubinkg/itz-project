@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { deleteAbandoned } from '@/actions/abandoned';
+import { useRouter } from 'next/navigation';
 
 const AbandonedPropertyList = ({
   abandonedPropertyList,
@@ -10,6 +12,15 @@ const AbandonedPropertyList = ({
   abandonedPropertyList: Record<string, any>[];
   onEdit: (abandoned: Record<string, any>) => void;
 }) => {
+  const router = useRouter();
+
+  const handleDelete = async (id: string) => {
+    if (window.confirm('আপনি কি নিশ্চিতভাবে মুছে ফেলতে চান?')) {
+      await deleteAbandoned(id);
+      router.refresh();
+    }
+  };
+
   return (
     <tbody>
       {abandonedPropertyList.length === 0 ? (
@@ -35,7 +46,7 @@ const AbandonedPropertyList = ({
                 ? new Date(abandoned.createdAt).toLocaleDateString('bn-BD')
                 : ''}
             </td>
-            <td className="p-3 whitespace-nowrap">
+            <td className="p-3 whitespace-nowrap flex gap-2">
               <Button
                 size="sm"
                 variant="outline"
@@ -43,6 +54,13 @@ const AbandonedPropertyList = ({
                 onClick={() => onEdit(abandoned)}
               >
                 Edit
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => handleDelete(abandoned.id)}
+              >
+                Delete
               </Button>
             </td>
           </tr>

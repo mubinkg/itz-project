@@ -46,7 +46,7 @@ export default function AbandonedPropertyClient({
               <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">জমির পরিমাণ</th>
               <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">নিবন্ধনের তারিখ</th>
               <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">পরিদর্শনের তারিখ</th>
-              <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">বুক-১২ কেস</th>
+              <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">বুক-১২ কেস নং এবং তারিখ</th>
               <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">মন্তব্য</th>
               <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">লেখার তারিখ</th>
               <th className="p-3 text-left whitespace-nowrap font-semibold text-green-900 dark:text-green-200">অ্যাকশন</th>

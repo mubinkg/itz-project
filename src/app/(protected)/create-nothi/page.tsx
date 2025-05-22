@@ -13,7 +13,14 @@ export default async function Page() {
     },
   });
 
-  const nothiList = await prisma.nothi.findMany();
+  const nothiList = await prisma.nothi.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      mouja: true
+    }
+  });
 
   return (
     <div>
@@ -56,21 +63,25 @@ export default async function Page() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="border text-center">1</TableCell>
-              <TableCell className="border text-center">05/85</TableCell>
-              <TableCell className="border text-center">সৌলিমাবাদ</TableCell>
-              <TableCell className="border text-center">১৪৮</TableCell>
-              <TableCell className="border text-center">১১১</TableCell>
-              <TableCell className="border text-center">৩৯৭</TableCell>
-              <TableCell className="border text-center">০.০৭</TableCell>
-              <TableCell className="border text-center">আম বাগান</TableCell>
-              <TableCell className="border text-center">১৪২৯</TableCell>
-              <TableCell className="border text-center">
-                মোঃ সালেহ হোসেন পিতা- মোঃ মজিদ উদ্দিন সাং- জগৎড়িপাড়া, দিনাজপুর
-              </TableCell>
-              <TableCell className="border text-center"></TableCell>
-            </TableRow>
+            {
+              nothiList.map((nothi, index) => (
+                <TableRow key={nothi.id}>
+                  <TableCell className="border text-center">{index + 1}</TableCell>
+                  <TableCell className="border text-center">{nothi.caseNo}</TableCell>
+                  <TableCell className="border text-center">{nothi.mouja.name}</TableCell>
+                  <TableCell className="border text-center">{nothi.mouja.jlNo}</TableCell>
+                  <TableCell className="border text-center">১১১</TableCell>
+                  <TableCell className="border text-center">৩৯৭</TableCell>
+                  <TableCell className="border text-center">০.০৭</TableCell>
+                  <TableCell className="border text-center">আম বাগান</TableCell>
+                  <TableCell className="border text-center">১৪২৯</TableCell>
+                  <TableCell className="border text-center">
+                    মোঃ সালেহ হোসেন পিতা- মোঃ মজিদ উদ্দিন সাং- জগৎড়িপাড়া, দিনাজপুর
+                  </TableCell>
+                  <TableCell className="border text-center"></TableCell>
+                </TableRow>
+              ))
+            }
           </TableBody>
         </Table>
       </div>

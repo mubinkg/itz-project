@@ -43,8 +43,23 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
         quantity,
         renewalDate,
       })
+      setMobile('')
       if (data.success) {
         toast.success(data.message)
+        router.refresh()
+        setMouja('')
+        setCaseNo('')
+        setKhotianNo([])
+        setLineNo([])
+        setQuantity('')
+        setLandType('')
+        setComment('')
+        setCaseInfo('')
+        setName('')
+        setParentName('')
+        setAddress('')
+        setMobile('')
+        setRenewalDate('')
       }
     } catch (err) {
       console.log(err)
@@ -230,6 +245,7 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
       <div className="flex gap-4">
         <Button
           className="bg-blue-700 hover:bg-blue-800"
+          onClick={createNothiHandler}
         >
           নথি সংরক্ষণ
         </Button>

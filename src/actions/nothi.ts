@@ -35,6 +35,7 @@ export async function createNothi({
   status?: Status
 }) {
   try {
+    console.log('hello')
     const nothi = await prisma.nothi.create({
       data: {
         moujaId,
@@ -60,7 +61,7 @@ export async function createNothi({
       message: 'Nothi created successfully!',
     };
   } catch (err) {
-    console.error(err); // helpful during debugging
+    console.error('Error data ', err); // helpful during debugging
     return {
       success: false,
       message: 'Error on creating nothi!',

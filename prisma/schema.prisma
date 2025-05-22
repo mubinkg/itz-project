@@ -53,7 +53,7 @@ model Nothi {
   parentName  String
   address     String
   mobile      String
-  renewalDate DateTime
+  renewalDate String
   status      Status   @default(ACTIVE)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

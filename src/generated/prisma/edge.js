@@ -114,7 +114,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\mubin\\itz-project\\src\\generated\\prisma",
+      "value": "/Users/imtiazmamun/Documents/GitHubProjects/Full-Stack/itz-project/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -123,12 +123,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\mubin\\itz-project\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/imtiazmamun/Documents/GitHubProjects/Full-Stack/itz-project/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -142,11 +142,12 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:./dev.db"
+        "value": null
       }
     }
   },

@@ -32,10 +32,10 @@ export async function createNothi({
   address: string;
   mobile: string;
   renewalDate: string;
-  status?: Status
+  status?: Status;
 }) {
   try {
-    console.log('hello')
+    console.log('hello');
     const nothi = await prisma.nothi.create({
       data: {
         moujaId,

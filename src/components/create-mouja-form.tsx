@@ -19,12 +19,12 @@ const CreateMoujaForm = () => {
         e.preventDefault();
         try {
           if (!mouja || !jlNo) {
-            return toast.error('Mouja and jl no is required!')
+            return toast.error('Mouja and jl no is required!');
           }
           const data = await createMouja({ name: mouja, jlNo });
-          toast.success(data.message)
+          toast.success(data.message);
           setMouja('');
-          setJlno('')
+          setJlno('');
           router.refresh();
         } catch (err) {
           console.log(err);

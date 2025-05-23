@@ -1,7 +1,14 @@
 import CreateNothi from '@/components/nothi/CreateNothi';
 import NothiList from '@/components/nothi/NothiList';
 import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { prisma } from '@/lib/db';
 
 export default async function Page() {
@@ -19,8 +26,8 @@ export default async function Page() {
       createdAt: 'desc',
     },
     include: {
-      mouja: true
-    }
+      mouja: true,
+    },
   });
 
   return (

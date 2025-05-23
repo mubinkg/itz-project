@@ -1,10 +1,16 @@
-import React from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
-import { Nothi } from '@/generated/prisma'
+import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../ui/table';
 
 const NothiList = ({ nothiList }: { nothiList: Record<string, any>[] }) => {
   return (
-    <div className="rounded-md border overflow-x-auto w-[81.5vw]">
+    <div className="w-[81.5vw] overflow-x-auto rounded-md border">
       <Table>
         <TableHeader>
           <TableRow>
@@ -17,11 +23,12 @@ const NothiList = ({ nothiList }: { nothiList: Record<string, any>[] }) => {
             <TableHead colSpan={5} className="border text-center">
               তফসিল
             </TableHead>
-            <TableHead rowSpan={2} className="border text-wrap text-center">
+            <TableHead rowSpan={2} className="border text-center text-wrap">
               জমির সরবমোট গ্রীন বরাদ্দ/নবায়ন/ নবায়নের সাল
             </TableHead>
             <TableHead rowSpan={2} className="border text-center">
-              গ্রীন বরাদ্দাতার নাম ঠিকানা ও মোবাইল নম্বর/ অধিষ্ঠ প্রতিষ্ঠানের নাম ও মোবাইল নম্বর
+              গ্রীন বরাদ্দাতার নাম ঠিকানা ও মোবাইল নম্বর/ অধিষ্ঠ প্রতিষ্ঠানের
+              নাম ও মোবাইল নম্বর
             </TableHead>
             <TableHead rowSpan={2} className="border text-center">
               মামলা সংক্রান্ত তথ্য (যদি থাকে)
@@ -39,39 +46,51 @@ const NothiList = ({ nothiList }: { nothiList: Record<string, any>[] }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {
-            nothiList.map((nothi, index) => (
-              <TableRow key={nothi.id}>
-                <TableCell className="border text-center">{index + 1}</TableCell>
-                <TableCell className="border text-center">{nothi.caseNo}</TableCell>
-                <TableCell className="border text-center">{nothi.mouja.name}</TableCell>
-                <TableCell className="border text-center">{nothi.mouja.jlNo}</TableCell>
-                <TableCell className="border text-center">{nothi.khotianNo}</TableCell>
-                <TableCell className="border text-center">{nothi.lineNo}</TableCell>
-                <TableCell className="border text-center">{nothi.quantity}</TableCell>
-                <TableCell className="border text-center">{nothi.renewalDate}</TableCell>
-                <TableCell className="border text-center">
-                  {nothi.name}
-                  <br />
-                  পিতা- {nothi.parentName}
-                  <br />
-                  সাং- {nothi.address}
-                  <br />
-                  {nothi.mobile}
-                </TableCell>
-                <TableCell className="border text-center">
-                  {
-                    nothi.caseInfo
-                  }
-                </TableCell>
-                <TableCell className="border text-center">{nothi.comment}</TableCell>
-              </TableRow>
-            ))
-          }
+          {nothiList.map((nothi, index) => (
+            <TableRow key={nothi.id}>
+              <TableCell className="border text-center">{index + 1}</TableCell>
+              <TableCell className="border text-center">
+                {nothi.caseNo}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.mouja.name}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.mouja.jlNo}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.khotianNo}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.lineNo}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.quantity}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.renewalDate}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.name}
+                <br />
+                পিতা- {nothi.parentName}
+                <br />
+                সাং- {nothi.address}
+                <br />
+                {nothi.mobile}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.caseInfo}
+              </TableCell>
+              <TableCell className="border text-center">
+                {nothi.comment}
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>
-  )
-}
+  );
+};
 
-export default NothiList
+export default NothiList;

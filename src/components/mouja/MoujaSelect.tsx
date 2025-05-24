@@ -24,7 +24,7 @@ export function MoujaSelect({
   value: any
   setValue: any
 }) {
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = React.useState(false)
   const frameworks = mouzaData.map((mouja) => ({
     label: mouja.name,
     value: mouja.id,

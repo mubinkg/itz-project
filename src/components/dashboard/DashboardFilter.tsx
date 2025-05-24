@@ -1,51 +1,73 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { MoujaSelect } from '../mouja/MoujaSelect';
-import { Mouja } from '@/generated/prisma';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { MoujaSelect } from '../mouja/MoujaSelect'
+import { Mouja } from '@/generated/prisma'
+import { useRouter } from 'next/navigation'
+import { Search, Filter, RotateCcw } from "lucide-react"
 
 const DashboardFilter = ({ mouzaData }: { mouzaData: Mouja[] }) => {
-  const router = useRouter();
-  const [moujaId, setMouja] = useState('');
-  const [lineNo, setLineNo] = useState('');
+  const router = useRouter()
+  const [moujaId, setMouja] = useState('')
+  const [lineNo, setLineNo] = useState('')
 
   return (
-    <div className="mb-6 flex flex-col gap-4 md:flex-row">
-      <Card className="flex-1 border-2 border-green-500 p-4">
-        <div className="mb-2 font-medium">মৌজা</div>
-        <MoujaSelect
-          mouzaData={mouzaData}
-          value={moujaId}
-          setValue={setMouja}
-        />
-      </Card>
-      <Card className="flex-1 border-2 border-green-500 p-4">
-        <div className="mb-2 font-medium">দাগ নং</div>
-        <div className="flex gap-2">
-          <Input
-            placeholder="দাগ"
-            value={lineNo}
-            onChange={e => setLineNo(e.target.value)}
-          />
-          <Button
-            className="bg-green-600 hover:bg-green-700"
-            onClick={() => {
-              const params = new URLSearchParams();
-              params.set('moujaId', moujaId);
-              params.set('lineNo', lineNo);
-              router.push('/dashboard?' + params.toString());
-            }}
-          >
-            Search
-          </Button>
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Mouja Filter */}
+        <div className="space-y-3">
+          <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+            <Filter className="h-4 w-4 text-green-600" />
+            মৌজা নির্বাচন করুন
+          </label>
+          <div className="relative">
+            <MoujaSelect mouzaData={mouzaData} value={moujaId} setValue={setMouja} />
+          </div>
         </div>
-      </Card>
-    </div>
-  );
-};
 
-export default DashboardFilter;
+        {/* Line Number Filter */}
+        <div className="space-y-3">
+          <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+            <Search className="h-4 w-4 text-green-600" />
+            দাগ নম্বর
+          </label>
+          <Input
+            placeholder="দাগ নম্বর লিখুন..."
+            value={lineNo}
+            onChange={(e) => setLineNo(e.target.value)}
+            className="border-slate-300 focus:border-green-500 focus:ring-green-500"
+          />
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t">
+        <Button
+          onClick={() => {
+              const params = new URLSearchParams()
+              params.set('moujaId', moujaId)
+              params.set('lineNo', lineNo)
+              router.push('/dashboard?' + params.toString())
+            }}
+          className="flex-1 sm:flex-none bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium h-11 px-8 shadow-lg transition-all duration-200"
+        >
+          <Search className="h-4 w-4 mr-2" />
+          অনুসন্ধান করুন
+        </Button>
+        {/* <Button
+          onClick={handleReset}
+          variant="outline"
+          className="flex-1 sm:flex-none border-slate-300 text-slate-700 hover:bg-slate-50 h-11 px-6 transition-all duration-200"
+        >
+          <RotateCcw className="h-4 w-4 mr-2" />
+          রিসেট
+        </Button> */}
+      </div>
+    </div>
+  )
+}
+
+export default DashboardFilter

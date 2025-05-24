@@ -58,7 +58,8 @@ export function UpazilaSelect({
           <ChevronsUpDown className="opacity-50 ml-2 h-4 w-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent align="start"
+        className="w-[--radix-popover-trigger-width] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             placeholder="সার্কেল / উপজেলা খুঁজুন বা লিখুন..."

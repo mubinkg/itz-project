@@ -15,22 +15,30 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const userId = cookieStore.get('user')?.value;
   const user = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
+    where: { id: userId },
   });
 
   return (
     <SidebarProvider>
-      <AppSidebar user={user} />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-          </div>
-        </header>
-        <div className="px-10 py-4">{children}</div>
-      </SidebarInset>
+      <div className="w-full flex min-h-screen">
+        {/* Sidebar */}
+        <AppSidebar user={user} />
+
+        {/* Main content area */}
+        <div className="flex-1 flex flex-col min-h-screen">
+          {/* Header backdrop-blur */}
+          {/* <header className="sticky top-0 z-30 flex h-16 items-center bg-white/30 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800 px-4 shadow-sm"> */}
+          <header className="sticky top-0 z-30 flex h-16 items-center">
+            <SidebarTrigger className="mr-2" />
+            {/* You can add a logo or page title here if needed */}
+          </header>
+
+          {/* Page Content */}
+          <main className="flex-1">
+            {children}
+          </main>
+        </div>
+      </div>
     </SidebarProvider>
   );
 }

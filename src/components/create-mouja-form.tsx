@@ -14,7 +14,7 @@ const CreateMoujaForm = () => {
 
   return (
     <form
-      className="mb-8 rounded-sm border border-green-500 p-6"
+      className="w-full mb-8 rounded-sm p-6"
       onSubmit={async e => {
         e.preventDefault();
         try {

@@ -9,6 +9,7 @@ import { Mouja } from '@/generated/prisma';
 import { useRouter } from 'next/navigation';
 import { upazilaList } from '@/lib/upazila-list';
 import { createAbandoned, updateAbandoned } from '@/actions/abandoned';
+import { RotateCcw, Save, RefreshCcw, Pencil } from 'lucide-react';
 
 // Helper to format YYYY-MM-DD to dd/mm/YYYY
 const formatDate = (dateStr: string) => {
@@ -209,13 +210,24 @@ const CreateAbandonedProperty = ({
       <div className="flex gap-4 flex-wrap justify-end">
         <Button
           type="submit"
-          className="bg-green-700 hover:bg-green-800"
+          className="bg-green-700 hover:bg-green-800 flex items-center gap-2"
         >
-          {editingId ? 'আপডেট করুন' : 'সংরক্ষণ করুন'}
+          {editingId ? (
+            <>
+              <Pencil className="w-4 h-4" />
+              আপডেট করুন
+            </>
+          ) : (
+            <>
+              <Save className="w-4 h-4" />
+              সংরক্ষণ করুন
+            </>
+          )}
         </Button>
         <Button
           type="button"
-          variant="destructive"
+          variant="outline"
+          className="border-amber-500 text-amber-500 hover:text-amber-700 hover:bg-amber-50 flex items-center gap-2"
           onClick={() => {
             setEditingId(null);
             setMouja('');
@@ -230,7 +242,8 @@ const CreateAbandonedProperty = ({
             if (onFinishEdit) onFinishEdit();
           }}
         >
-          Refresh
+          <RotateCcw className="w-4 h-4" />
+          রিফ্রেশ
         </Button>
       </div>
     </form>

@@ -1,15 +1,26 @@
 import DashboardFilter from '@/components/dashboard/DashboardFilter';
 import NothiList from '@/components/nothi/NothiList';
-import ResultsTable from '@/components/results/ResultsTable';
 import { prisma } from '@/lib/db';
 
 export default async function LandOffice({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const params = await searchParams;
+  const filter: Record<string, any> = {}
+  if (params?.moujaId) {
+    filter['moujaId'] = {
+      equals: params.moujaId
+    }
+  }
+  if (params?.lineNo) {
+    filter['lineNo'] = {
+      contains: params.lineNo
+    }
+  }
   const nothiList = await prisma.nothi.findMany({
+    where: filter,
     include: {
       mouja: true,
     },

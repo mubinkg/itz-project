@@ -2,13 +2,19 @@
 
 import { prisma } from '@/lib/db';
 
-export async function createMouja({ name, jlNo }: { name: string, jlNo: string }) {
+export async function createMouja({
+  name,
+  jlNo,
+}: {
+  name: string;
+  jlNo: string;
+}) {
   console.log(name);
   try {
     const mouja = await prisma.mouja.create({
       data: {
         name,
-        jlNo
+        jlNo,
       },
     });
     return {

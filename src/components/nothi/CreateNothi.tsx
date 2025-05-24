@@ -14,17 +14,17 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
   const router = useRouter();
   const [moujaId, setMouja] = useState('');
   const [caseNo, setCaseNo] = useState('');
-  const [khotianNo, setKhotianNo] = useState<string[]>([])
-  const [lineNo, setLineNo] = useState<string[]>([])
-  const [quantity, setQuantity] = useState('')
-  const [landType, setLandType] = useState('')
-  const [comment, setComment] = useState('')
-  const [caseInfo, setCaseInfo] = useState('')
-  const [name, setName] = useState('')
-  const [parentName, setParentName] = useState('')
-  const [address, setAddress] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [renewalDate, setRenewalDate] = useState('')
+  const [khotianNo, setKhotianNo] = useState<string[]>([]);
+  const [lineNo, setLineNo] = useState<string[]>([]);
+  const [quantity, setQuantity] = useState('');
+  const [landType, setLandType] = useState('');
+  const [comment, setComment] = useState('');
+  const [caseInfo, setCaseInfo] = useState('');
+  const [name, setName] = useState('');
+  const [parentName, setParentName] = useState('');
+  const [address, setAddress] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [renewalDate, setRenewalDate] = useState('');
 
   async function createNothiHandler() {
     try {
@@ -42,12 +42,27 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
         parentName,
         quantity,
         renewalDate,
-      })
+      });
+      setMobile('');
       if (data.success) {
-        toast.success(data.message)
+        toast.success(data.message);
+        router.refresh();
+        setMouja('');
+        setCaseNo('');
+        setKhotianNo([]);
+        setLineNo([]);
+        setQuantity('');
+        setLandType('');
+        setComment('');
+        setCaseInfo('');
+        setName('');
+        setParentName('');
+        setAddress('');
+        setMobile('');
+        setRenewalDate('');
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 
@@ -90,10 +105,7 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
           </label>
         </div>
         <div className="col-span-2">
-          <InputTags
-            value={khotianNo}
-            onChange={setKhotianNo}
-          />
+          <InputTags value={khotianNo} onChange={setKhotianNo} />
         </div>
       </div>
 
@@ -104,10 +116,7 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
           </label>
         </div>
         <div className="col-span-2">
-          <InputTags
-            value={lineNo}
-            onChange={setLineNo}
-          />
+          <InputTags value={lineNo} onChange={setLineNo} />
         </div>
       </div>
       <div className="flex flex-col gap-2">
@@ -145,7 +154,8 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
       <div className="flex flex-col gap-2">
         <div className="flex items-center">
           <label htmlFor="bengaliYear" className="mr-2 whitespace-nowrap">
-            সর্বশেষ লীজ প্রদান/ নবায়নে র সাল <span className="text-red-500">*</span>
+            সর্বশেষ লীজ প্রদান/ নবায়নে র সাল{' '}
+            <span className="text-red-500">*</span>
           </label>
         </div>
         <div className="col-span-2">
@@ -161,10 +171,11 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
       <div className="flex flex-col gap-2">
         <div className="flex items-center">
           <label htmlFor="bengaliYear" className="mr-2 whitespace-nowrap">
-            লীজ গ্রহীতার নাম, ঠিকানা ও মোবাইল নম্বর/ অবৈধ দখলদাররে নাম ও মোবাইল নম্বর <span className="text-red-500">*</span>
+            লীজ গ্রহীতার নাম, ঠিকানা ও মোবাইল নম্বর/ অবৈধ দখলদাররে নাম ও মোবাইল
+            নম্বর <span className="text-red-500">*</span>
           </label>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-4">
           <Input
             value={name}
             onChange={e => setName(e.target.value)}
@@ -230,6 +241,7 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
       <div className="flex gap-4">
         <Button
           className="bg-blue-700 hover:bg-blue-800"
+          onClick={createNothiHandler}
         >
           নথি সংরক্ষণ
         </Button>

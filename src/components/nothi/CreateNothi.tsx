@@ -347,7 +347,7 @@ const progress = Math.round((filledCount / requiredFields.length) * 100);
           {/* Sidebar */}
           <div className="space-y-6 flex flex-col sticky top-4 justify-start">
             {/* Progress Card */}
-            <Card className="py-0 mb-8 gap-0 border-0 shadow-md bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+            <Card className="py-0 mb-8 gap-0 border-0 shadow-md bg-gradient-to-br from-sky-600 to-cyan-700 text-white">
               <CardContent className="p-6">
                 <div className="text-center space-y-4">
                   <CheckCircle2 className="h-12 w-12 mx-auto text-white/80" />
@@ -374,7 +374,7 @@ const progress = Math.round((filledCount / requiredFields.length) * 100);
                 <Button
                   onClick={createNothiHandler}
                   disabled={isSubmitting}
-                  className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition-all duration-200"
+                  className="w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold shadow-lg transition-all duration-200"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-2">

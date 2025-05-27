@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MoujaSelect } from '../mouja/MoujaSelect';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
@@ -8,7 +8,7 @@ import { Badge } from "../ui/badge";
 import { Label } from "../ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Mouja } from '@/generated/prisma';
-import { createNothi } from '@/actions/nothi';
+import { createNothi, updateNothi } from '@/actions/nothi';
 import { useRouter } from 'next/navigation';
 import { InputTags } from './tag-input';
 import { toast } from 'sonner';
@@ -26,22 +26,69 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
+type EditData = {
+  id: string;
+  moujaId: string;
+  caseNo: string;
+  khotianNo: string[];
+  lineNo: string[];
+  quantity: string;
+  landType: string;
+  comment: string;
+  caseInfo: string;
+  name: string;
+  parentName: string;
+  address: string;
+  mobile: string;
+  renewalDate: string;
+};
+
+const CreateNothi = ({ mouzaData, editData, onFinishEdit }: { 
+  mouzaData: Mouja[], 
+  editData?: EditData, 
+  onFinishEdit?: () => void 
+}) => {
   const router = useRouter();
-  const [moujaId, setMouja] = useState('');
-  const [caseNo, setCaseNo] = useState('');
+  const [editId, setEditId] = useState<string>('');
+  const [moujaId, setMouja] = useState<string>('');
+  const [caseNo, setCaseNo] = useState<string>('');
   const [khotianNo, setKhotianNo] = useState<string[]>([]);
   const [lineNo, setLineNo] = useState<string[]>([]);
-  const [quantity, setQuantity] = useState('');
-  const [landType, setLandType] = useState('');
-  const [comment, setComment] = useState('');
-  const [caseInfo, setCaseInfo] = useState('');
-  const [name, setName] = useState('');
-  const [parentName, setParentName] = useState('');
-  const [address, setAddress] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [renewalDate, setRenewalDate] = useState('');
+  const [quantity, setQuantity] = useState<string>('');
+  const [landType, setLandType] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
+  const [caseInfo, setCaseInfo] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [parentName, setParentName] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [mobile, setMobile] = useState<string>('');
+  const [renewalDate, setRenewalDate] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (editData) {
+      console.log('Edit Data:', editData);
+      // Set form values based on editData
+      if (editData.id) {
+        setIsEditing(true);
+      }
+      setEditId(editData.id || '');
+      setMouja(editData.moujaId || '');
+      setCaseNo(editData.caseNo || '');
+      setKhotianNo(editData.khotianNo || []); // Ensure it's always an array
+      setLineNo(editData.lineNo || []);       // Ensure it's always an array
+      setQuantity(editData.quantity || '');
+      setLandType(editData.landType || '');
+      setComment(editData.comment || '');
+      setCaseInfo(editData.caseInfo || '');
+      setName(editData.name || '');
+      setParentName(editData.parentName || '');
+      setAddress(editData.address || '');
+      setMobile(editData.mobile || '');
+      setRenewalDate(editData.renewalDate || '');
+    }
+  }, [editData]);
 
   async function createNothiHandler() {
     setIsSubmitting(true)
@@ -92,7 +139,58 @@ const CreateNothi = ({ mouzaData }: { mouzaData: Mouja[] }) => {
     }
   }
 
+
+  async function updateNothiHandler() {
+    setIsSubmitting(true);
+
+    // Validate required fields
+    if (!moujaId || !caseNo || !khotianNo.length || !lineNo.length || !quantity || !landType || !renewalDate) {
+      toast.error('অনুগ্রহ করে সকল আবশ্যক ক্ষেত্র পূরণ করুন');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // Call the updateNothi action
+      const data = await updateNothi({
+        id: editId,
+        moujaId,
+        caseNo,
+        khotianNo: khotianNo.join(','), // Convert array to comma-separated string
+        lineNo: lineNo.join(','),       // Convert array to comma-separated string
+        quantity,
+        landType,
+        comment,
+        caseInfo,
+        name,
+        parentName,
+        address,
+        mobile,
+        renewalDate,
+        status: 'ACTIVE', // Use the existing status or default to ACTIVE
+      });
+
+      if (data.success) {
+        toast.success('নথি সফলভাবে আপডেট হয়েছে!');
+        router.refresh(); // Refresh the page or data
+        resetForm(); // Reset the form
+        if (onFinishEdit) onFinishEdit(); // Clear editData
+        setIsEditing(false); // Reset editing state
+      } else {
+        toast.error(data.message || 'নথি আপডেট করতে ব্যর্থ হয়েছে!');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('নথি আপডেট করার সময় একটি ত্রুটি ঘটেছে!');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+
   const resetForm = () => {
+    setIsEditing(false);
+    setEditId("")
     setMouja("")
     setCaseNo("")
     setKhotianNo([])
@@ -162,7 +260,7 @@ const progress = Math.round((filledCount / requiredFields.length) * 100);
                     </Badge>
                   </Label>
                   <Input
-                    value={caseNo}
+                    value={caseNo || ''}
                     onChange={(e) => setCaseNo(e.target.value)}
                     placeholder="কেস নথি নং লিখুন..."
                     className="h-12 border-slate-300 focus:border-blue-500 focus:ring-blue-500"
@@ -178,7 +276,7 @@ const progress = Math.round((filledCount / requiredFields.length) * 100);
                         আবশ্যক
                       </Badge>
                     </Label>
-                    <InputTags value={khotianNo} onChange={setKhotianNo} />
+                    <InputTags value={khotianNo ||  []} onChange={setKhotianNo} />
                   </div>
 
                   <div className="space-y-3">
@@ -189,7 +287,7 @@ const progress = Math.round((filledCount / requiredFields.length) * 100);
                         আবশ্যক
                       </Badge>
                     </Label>
-                    <InputTags value={lineNo} onChange={setLineNo} />
+                    <InputTags value={lineNo || []} onChange={setLineNo} />
                   </div>
                 </div>
               </CardContent>
@@ -372,19 +470,23 @@ const progress = Math.round((filledCount / requiredFields.length) * 100);
             <Card className="py-0 mb-8 gap-0 border-0 shadow-md bg-white/80 backdrop-blur-sm">
               <CardContent className="p-6 space-y-4">
                 <Button
-                  onClick={createNothiHandler}
+                  onClick={isEditing ? updateNothiHandler : createNothiHandler}
                   disabled={isSubmitting}
-                  className="w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold shadow-lg transition-all duration-200"
+                  className={`w-full h-12 text-white font-semibold shadow-lg transition-all duration-200
+                  ${isEditing 
+                    ? 'bg-yellow-600 hover:bg-yellow-700' 
+                    : 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-700 hover:to-teal-700'
+                  }`}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-2">
                       <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      সংরক্ষণ হচ্ছে...
+                      {isEditing ? "আপডেট হচ্ছে..." : "সংরক্ষণ হচ্ছে..."}
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
                       <Save className="h-4 w-4" />
-                      নথি সংরক্ষণ করুন
+                      {isEditing ? "নথি আপডেট করুন" : "নথি সংরক্ষণ করুন"}
                     </div>
                   )}
                 </Button>

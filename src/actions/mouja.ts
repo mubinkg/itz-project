@@ -52,3 +52,33 @@ export async function deleteMouja(id: string) {
     };
   }
 }
+
+export async function updateMouja(data: { id: string; name: string; jlNo: string }) {
+  try {
+    const mouja = await prisma.mouja.update({
+      where: { id: data.id },
+      data: {
+        name: data.name,
+        jlNo: data.jlNo,
+      },
+    });
+    return {
+      success: true,
+      data: mouja,
+      message: "মৌজা সফলভাবে আপডেট হয়েছে",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "মৌজা আপডেট করতে সমস্যা হয়েছে",
+    };
+  }
+}
+
+
+export async function getActiveMoujas() {
+  return await prisma.mouja.findMany({
+    where: { status: 'ACTIVE' },
+    orderBy: { createdAt: 'desc' },
+  });
+}

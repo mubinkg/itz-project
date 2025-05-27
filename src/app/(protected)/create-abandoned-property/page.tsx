@@ -17,7 +17,7 @@ export default async function Page() {
     <div className="bg-white pb-16 min-h-screen">
       {/* Header */}
       
-      <div className="w-full text-center space-y-4 pb-4 sticky top-[1px] z-99 px-8">
+      <div className="w-full text-center space-y-4 pb-4 sticky top-[1px] z-10 px-8">
         <div className="w-full inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-md">
         <Building2 className="h-6 w-6" />
         <h1 className="text-xl font-bold">মৌজার নতুন নথি তৈরি করুন</h1>

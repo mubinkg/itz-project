@@ -1,69 +1,97 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { createMouja } from '@/actions/mouja';
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { createMouja, updateMouja } from '@/actions/mouja';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-const CreateMoujaForm = () => {
-  const [mouja, setMouja] = useState('');
-  const [jlNo, setJlno] = useState('');
+const CreateMoujaForm = ({
+  editData,
+  onFinishEdit,
+}: {
+  editData?: { id: string; name: string; jlNo: string } | null;
+  onFinishEdit?: () => void;
+}) => {
+  const [name, setName] = useState('');
+  const [jlNo, setJlNo] = useState('');
+  const [editingId, setEditingId] = useState<string | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    console.log('Edit Data:', editData);
+    if (editData) {
+      setEditingId(editData.id);
+      setName(editData.name || '');
+      setJlNo(editData.jlNo || '');
+    } else {
+      setEditingId(null);
+      setName('');
+      setJlNo('');
+    }
+  }, [editData]);
+
+  const handleSubmit = async () => {
+    if (editingId) {
+      // Update Mouja
+      await updateMouja({ id: editingId, name, jlNo });
+      if (onFinishEdit) onFinishEdit();
+    } else {
+      // Create Mouja
+      await createMouja({ name, jlNo });
+      router.refresh();
+    }
+  };
 
   return (
     <form
-      className="w-full mb-8 rounded-sm p-6"
-      onSubmit={async e => {
+      onSubmit={e => {
         e.preventDefault();
-        try {
-          if (!mouja || !jlNo) {
-            return toast.error('Mouja and jl no is required!');
-          }
-          const data = await createMouja({ name: mouja, jlNo });
-          toast.success(data.message);
-          setMouja('');
-          setJlno('');
-          router.refresh();
-        } catch (err) {
-          console.log(err);
-        }
+        handleSubmit();
       }}
+      className="space-y-6"
     >
-      <div className="space-y-4">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="mouza" className="font-medium">
-            মৌজা <span className="text-red-500">*</span>
-          </label>
-          <Input
-            id="mouza"
-            value={mouja}
-            onChange={e => setMouja(e.target.value)}
-            placeholder="মৌজা"
-            className="w-full"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="mouza" className="font-medium">
-            জে.এল. নং <span className="text-red-500">*</span>
-          </label>
-          <Input
-            id="glno"
-            value={jlNo}
-            onChange={e => setJlno(e.target.value)}
-            placeholder="জে.এল. নং"
-            className="w-full"
-          />
-        </div>
-        <div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          মৌজার নাম
+        </label>
+        <Input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="মৌজার নাম লিখুন"
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          জে.এল. নং
+        </label>
+        <Input
+          value={jlNo}
+          onChange={e => setJlNo(e.target.value)}
+          placeholder="জে.এল. নং লিখুন"
+          required
+        />
+      </div>
+      <div className="flex justify-end gap-4">
+        {editingId && (
           <Button
-            className="bg-green-600 text-white hover:bg-green-700"
-            type="submit"
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setEditingId(null);
+              setName('');
+              setJlNo('');
+              if (onFinishEdit) onFinishEdit();
+            }}
           >
-            মৌজা সংরক্ষণ
+            বাতিল করুন
           </Button>
-        </div>
+        )}
+        <Button type="submit" className="bg-green-600 hover:bg-green-700">
+          {editingId ? 'আপডেট করুন' : 'সংরক্ষণ করুন'}
+        </Button>
       </div>
     </form>
   );

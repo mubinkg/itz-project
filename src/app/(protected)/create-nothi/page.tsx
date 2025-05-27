@@ -17,13 +17,13 @@ export default async function Page() {
   return (
     <div className='p-6 pt-0 bg-white min-h-screen'>
       {/* Header */}
-        <div className="w-full text-center space-y-4 pb-4 sticky top-[1px] z-99 px-2">
-          <div className="w-full inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-md">
-          <Sparkles className="h-6 w-6" />
-          <h1 className="text-xl font-bold">মৌজার নতুন নথি তৈরি করুন</h1>
-          <p className="text-slate-100 max-w-2xl mx-auto">
-            ভূমি সংক্রান্ত নতুন নথি তৈরি করতে নিচের ফর্মটি পূরণ করুন। সকল প্রয়োজনীয় তথ্য সঠিকভাবে প্রদান করুন।
-          </p>
+      <div className="w-full text-center space-y-4 pb-4 sticky top-[1px] z-99 px-2">
+        <div className="w-full inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-md">
+        <Sparkles className="h-6 w-6" />
+        <h1 className="text-xl font-bold">মৌজার নতুন নথি তৈরি করুন</h1>
+        <p className="text-slate-100 max-w-2xl mx-auto">
+          ভূমি সংক্রান্ত নতুন নথি তৈরি করতে নিচের ফর্মটি পূরণ করুন। সকল প্রয়োজনীয় তথ্য সঠিকভাবে প্রদান করুন।
+        </p>
         </div>
       </div>
 

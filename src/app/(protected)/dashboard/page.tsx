@@ -1,5 +1,6 @@
 import DashboardFilter from '@/components/dashboard/DashboardFilter'
 import NothiList from '@/components/nothi/NothiList'
+import AbandonedPropertyList from '@/components/abandoned-property/AbandonedPropertyList'
 import { prisma } from '@/lib/db'
 import { Card } from "@/components/ui/card"
 import { Building2, MapPin, Phone } from "lucide-react"
@@ -21,6 +22,7 @@ export default async function LandOffice({
       contains: params.lineNo
     }
   }
+  const totalNothiCount = await prisma.nothi.count();
   const nothiList = await prisma.nothi.findMany({
     where: filter,
     include: {
@@ -43,7 +45,45 @@ export default async function LandOffice({
     orderBy: {
       createdAt: 'desc',
     },
+    include: {
+      mouja: true,
+    },
   })
+
+  // --- Search logic ---
+  let foundType = 'none';
+  let foundNothi: any[] = [];
+  let foundAbandoned: any[] = [];
+  let showNothi = false;
+  let showAbandoned = false;
+
+  if (params?.lineNo) {
+    // Full match for lineNo in nothiList (supporting multiple lineNo per row)
+    foundNothi = nothiList.filter((item) => {
+      if (!item.lineNo) return false;
+      const searchLineNo = params.lineNo ?? '';
+      // If lineNo is an array
+      if (Array.isArray(item.lineNo)) {
+        return item.lineNo.map(String).includes(searchLineNo);
+      }
+      // If lineNo is a comma-separated string
+      return item.lineNo
+        .split(',')
+        .map((ln: string) => ln.trim())
+        .includes(searchLineNo);
+    });
+
+    // Full match for dagNo in abandonedData
+    foundAbandoned = abandentData.filter(
+      (item) => item.dagNo && item.dagNo.toString() === params.lineNo
+    );
+    showNothi = foundNothi.length > 0;
+    showAbandoned = foundAbandoned.length > 0;
+  } else {
+    // If no lineNo, show all nothiList by default
+    foundNothi = nothiList;
+    showNothi = foundNothi.length > 0;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -70,7 +110,7 @@ export default async function LandOffice({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-12 py-8">
           <Card className="p-6 bg-gradient-to-r from-green-700 to-green-800 text-white border-0 shadow-lg">
             <div className="text-center">
-              <div className="text-3xl font-bold">{nothiList.length}</div>
+              <div className="text-3xl font-bold">{totalNothiCount}</div>
               <div className="text-green-100 mt-1">মোট নথি</div>
             </div>
           </Card>
@@ -101,7 +141,7 @@ export default async function LandOffice({
         </Card>
 
         {/* Table Section */}
-        <Card className="py-6 px-6 shadow-md border-0 bg-white overflow-hidden gap-0  bg-gradient-to-r from-green-50 to-teal-50">
+        <Card className="py-6 px-6 shadow-md border-0 bg-white overflow-hidden bg-gradient-to-r from-green-50 to-teal-50">
           <div className="p-6 px-0 pt-0 border-b">
             <h2 className="text-xl font-semibold text-slate-800 flex items-center gap-2">
               <div className="h-6 w-1 bg-green-600 rounded-full"></div>
@@ -109,7 +149,26 @@ export default async function LandOffice({
             </h2>
             <p className="text-slate-600 mt-1">সকল ভূমি সংক্রান্ত নথির বিস্তারিত তথ্য</p>
           </div>
-          <NothiList nothiList={nothiList} />
+          {/* Initial prompt if no search/filter */}
+          {(!params?.moujaId && !params?.lineNo) && (
+            <div className="text-center py-12 text-lg text-slate-500 font-semibold">
+              মৌজা নির্বাচন করুন এবং দাগ নম্বর অনুসারে অনুসন্ধান করুন
+            </div>
+          )}
+          {/* Show results only if search/filter applied */}
+          {(params?.moujaId || params?.lineNo) && (
+            <>
+              {showNothi && <NothiList nothiList={foundNothi} />}
+              {showAbandoned && (
+                  <AbandonedPropertyList abandonedPropertyList={foundAbandoned} />
+              )}
+              {!showNothi && !showAbandoned && (
+                <div className="text-center py-12 text-lg text-red-500 font-semibold">
+                  কোনো তথ্য পাওয়া যায়নি
+                </div>
+              )}
+            </>
+          )}
         </Card>
       </div>
     </div>

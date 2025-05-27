@@ -47,24 +47,16 @@ const DashboardFilter = ({ mouzaData }: { mouzaData: Mouja[] }) => {
       <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t">
         <Button
           onClick={() => {
-              const params = new URLSearchParams()
-              params.set('moujaId', moujaId)
-              params.set('lineNo', lineNo)
-              router.push('/dashboard?' + params.toString())
+              const params = new URLSearchParams();
+              params.set('moujaId', moujaId);
+              params.set('lineNo', lineNo);
+              router.push('/dashboard?' + params.toString(), { scroll: false });
             }}
           className="flex-1 sm:flex-none bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium h-11 px-8 shadow-lg transition-all duration-200"
         >
           <Search className="h-4 w-4 mr-2" />
           অনুসন্ধান করুন
         </Button>
-        {/* <Button
-          onClick={handleReset}
-          variant="outline"
-          className="flex-1 sm:flex-none border-slate-300 text-slate-700 hover:bg-slate-50 h-11 px-6 transition-all duration-200"
-        >
-          <RotateCcw className="h-4 w-4 mr-2" />
-          রিসেট
-        </Button> */}
       </div>
     </div>
   )

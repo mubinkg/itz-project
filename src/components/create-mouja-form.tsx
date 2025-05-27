@@ -52,7 +52,7 @@ const CreateMoujaForm = ({
       }}
       className="space-y-6"
     >
-      <div>
+      <div className='flex flex-col gap-1'>
         <label className="block text-sm font-medium text-gray-700">
           মৌজার নাম
         </label>
@@ -63,7 +63,7 @@ const CreateMoujaForm = ({
           required
         />
       </div>
-      <div>
+      <div className='flex flex-col gap-1'>
         <label className="block text-sm font-medium text-gray-700">
           জে.এল. নং
         </label>

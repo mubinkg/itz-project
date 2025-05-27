@@ -210,7 +210,12 @@ const CreateAbandonedProperty = ({
       <div className="flex gap-4 flex-wrap justify-end">
         <Button
           type="submit"
-          className="bg-green-700 hover:bg-green-800 flex items-center gap-2"
+          // className="bg-green-700 hover:bg-green-800 flex items-center gap-2"
+          className={`text-white font-semibold shadow-lg transition-all duration-200
+            ${editingId 
+              ? 'bg-yellow-600 hover:bg-yellow-700' 
+              : 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-700 hover:to-teal-700'
+            }`}
         >
           {editingId ? (
             <>

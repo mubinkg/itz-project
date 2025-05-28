@@ -17,21 +17,13 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar';
 import { User } from '@/generated/prisma';
-import { cookies } from 'next/headers';
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   user: User | null;
+  role: string; // 'ADMIN' | 'EDITOR' | 'USER'
 };
 
-export function AppSidebar({ user, ...props }: AppSidebarProps) {
-  let role = '';
-  if (typeof window !== 'undefined') {
-    role = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('user_vumi_role='))
-      ?.split('=')[1] || '';
-  }
-
+export function AppSidebar({ user, role, ...props }: AppSidebarProps) {
   const navAll = [
     {
       title: 'ড্যাশবোর্ড',
@@ -58,11 +50,6 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       url: '/user-management',
       icon: Users,
     },
-    // {
-    //   title: 'দাগ নং এর তালিকা',
-    //   url: '/plot-list',
-    //   icon: BookOpen,
-    // },
   ];
 
   let navFiltered: typeof navAll = [];
@@ -74,7 +61,6 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
   } else if (role === 'USER') {
     navFiltered = navAll.filter(item => item.url === '/dashboard');
   }
-
 
   return (
     <Sidebar collapsible="icon" {...props}>

@@ -14,6 +14,7 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const userId = cookieStore.get('user')?.value;
+  const role = cookieStore.get('user_vumi_role')?.value || '';
   const user = await prisma.user.findUnique({
     where: { id: userId },
   });
@@ -22,7 +23,7 @@ export default async function RootLayout({
     <SidebarProvider>
       <div className="w-full flex min-h-screen">
         {/* Sidebar */}
-        <AppSidebar user={user} />
+        <AppSidebar user={user} role={role} />
 
         {/* Main content area */}
         <div className="flex-1 flex flex-col min-h-screen">

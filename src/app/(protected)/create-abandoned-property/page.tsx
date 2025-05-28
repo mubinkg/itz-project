@@ -1,8 +1,19 @@
 import AbandonedPropertyClient from './AbandonedPropertyClient';
 import { prisma } from '@/lib/db';
-import { Building2, ListChecks } from 'lucide-react';
+import { Building2 } from 'lucide-react';
+import { cookies } from 'next/headers';
+import AccessDenied from '@/components/common/AccessDenied';
 
 export default async function Page() {
+  // Get the role from cookies
+  const cookieStore = await cookies();
+  const role = cookieStore.get('user_vumi_role')?.value || '';
+
+  // Block access if the role is 'USER'
+  if (role === 'USER') {
+    return <AccessDenied />;
+  }
+
   const mouzaData = await prisma.mouja.findMany({
     where: { status: 'ACTIVE' },
     orderBy: { createdAt: 'desc' },
@@ -16,7 +27,6 @@ export default async function Page() {
   return (
     <div className="bg-white pb-16 min-h-screen">
       {/* Header */}
-
       <div className="w-full text-center space-y-4 pb-4 sticky top-[1px] z-10 px-8">
         <div className="w-full inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-md">
           <Building2 className="h-6 w-6" />

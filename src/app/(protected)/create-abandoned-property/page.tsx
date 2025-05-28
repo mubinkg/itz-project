@@ -16,14 +16,14 @@ export default async function Page() {
   return (
     <div className="bg-white pb-16 min-h-screen">
       {/* Header */}
-      
+
       <div className="w-full text-center space-y-4 pb-4 sticky top-[1px] z-10 px-8">
         <div className="w-full inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-md">
-        <Building2 className="h-6 w-6" />
-        <h1 className="text-xl font-bold">মৌজার নতুন নথি তৈরি করুন</h1>
-        <p className="text-slate-100 max-w-2xl mx-auto">
-          ভূমি সংক্রান্ত নতুন নথি তৈরি করতে নিচের ফর্মটি পূরণ করুন। সকল প্রয়োজনীয় তথ্য সঠিকভাবে প্রদান করুন।
-        </p>
+          <Building2 className="h-6 w-6" />
+          <h1 className="text-xl font-bold">পরিত্যক্ত সম্পত্তি তৈরি করুন</h1>
+          <p className="text-slate-100 max-w-2xl mx-auto">
+            নতুন পরিত্যক্ত সম্পত্তি যুক্ত ও সংরক্ষণের প্রক্রিয়া সম্পাদন করুন।
+          </p>
         </div>
       </div>
 

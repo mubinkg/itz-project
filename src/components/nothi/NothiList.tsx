@@ -38,7 +38,7 @@ const NothiList = ({ nothiList, onEdit }: { nothiList: Nothi[]; onEdit?: (item: 
         <TableHeader className="bg-gradient-to-r from-amber-100/50 to-amber-100/50">
           <TableRow>
             <TableHead rowSpan={2} className="border text-center border-blue-800">
-              ক্র. নং
+              অংশ নং
             </TableHead>
             <TableHead rowSpan={2} className="border text-center border-blue-800">
               নথি নম্বর
@@ -88,21 +88,21 @@ const NothiList = ({ nothiList, onEdit }: { nothiList: Nothi[]; onEdit?: (item: 
               <TableCell className="border text-center border-blue-800">
                 {Array.isArray(nothi.khotianNo)
                   ? nothi.khotianNo.map((item, index) => (
-                      <div key={index}>{item.trim()}</div>
-                    ))
+                    <div key={index}>{item.trim()}</div>
+                  ))
                   : nothi.khotianNo?.split(',').map((item, index) => (
-                      <div key={index}>{item.trim()}</div>
-                    ))}
+                    <div key={index}>{item.trim()}</div>
+                  ))}
               </TableCell>
 
               <TableCell className="border text-center border-blue-800">
                 {Array.isArray(nothi.lineNo)
                   ? nothi.lineNo.map((item, index) => (
-                      <div key={index}>{item.trim()}</div>
-                    ))
+                    <div key={index}>{item.trim()}</div>
+                  ))
                   : nothi.lineNo?.split(',').map((item, index) => (
-                      <div key={index}>{item.trim()}</div>
-                    ))}
+                    <div key={index}>{item.trim()}</div>
+                  ))}
               </TableCell>
               <TableCell className="border text-center border-blue-800">{nothi.quantity}</TableCell>
               <TableCell className="border text-center border-blue-800">{nothi.landType}</TableCell>

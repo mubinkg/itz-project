@@ -36,7 +36,7 @@ export default function NothiPageClient({ mouzaData, nothiList }: any) {
       <CreateNothi mouzaData={mouzaData} editData={editData} onFinishEdit={handleFinishEdit} />
 
       {/* Nothi List Section */}
-      <section className="mt-12">
+      <section className="mt-12 p-2">
         <div className="flex items-center gap-3 mb-4">
           <ListChecks className="h-6 w-6 text-indigo-600" />
           <h2 className="text-lg md:text-xl font-semibold text-indigo-700">

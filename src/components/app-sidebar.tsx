@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { BookOpen, Bot, SquareTerminal } from 'lucide-react';
+import { BookOpen, Bot, Building2, LayoutDashboard, MapPin, Sparkles, SquareTerminal, Users } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -22,24 +22,29 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       {
         title: 'ড্যাশবোর্ড',
         url: '/dashboard',
-        icon: SquareTerminal,
+        icon: LayoutDashboard,
         isActive: true,
       },
       {
         title: 'মৌজা তৈরি করুন',
         url: '/create-mouja',
-        icon: SquareTerminal,
+        icon: MapPin,
         isActive: true,
       },
       {
         title: 'মৌজার নথি তৈরি করুন',
         url: '/create-nothi',
-        icon: Bot,
+        icon: Sparkles,
       },
       {
         title: 'পরিত্যক্ত সম্পত্তি তৈরি করুন',
         url: '/create-abandoned-property',
-        icon: Bot,
+        icon: Building2,
+      },
+      {
+        title: 'ব্যবহারকারী পরিচালন',
+        url: '/user-management',
+        icon: Users,
       },
       // {
       //   title: 'দাগ নং এর তালিকা',

@@ -88,7 +88,7 @@ export default async function LandOffice({
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header Section */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white shadow-sm pt-8">
         <div className="container mx-auto px-4 pb-0">
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -96,13 +96,13 @@ export default async function LandOffice({
               <div className="h-8 w-1 bg-green-600 rounded-full"></div>
               <MapPin className="h-6 w-6 text-slate-600" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-800">সহকারী কামিশনার (ভূমি)</h1>
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-700">উপজেলা ভূমি অফিস</h2>
-            <h3 className="text-lg md:text-xl text-slate-600 font-medium">শিবগঞ্জ, চাঁপাইনবাবগঞ্জ</h3>
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mt-4">
+            {/* <h1 className="text-3xl md:text-4xl font-bold text-slate-800">সহকারী কামিশনার (ভূমি)</h1> */}
+            <h1 className="text-xl md:text-3xl font-semibold text-slate-700 mb-1">পৌর ভূমি অফিস</h1>
+            <h3 className="text-lg md:text-2xl text-slate-600 font-medium">শিবগঞ্জ</h3>
+            {/* <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mt-4">
               <Phone className="h-4 w-4" />
               <span>যোগাযোগ: ০১৭১২৩৪৫৬৭৮</span>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -160,7 +160,7 @@ export default async function LandOffice({
             <>
               {showNothi && <NothiList nothiList={foundNothi} />}
               {showAbandoned && (
-                  <AbandonedPropertyList abandonedPropertyList={foundAbandoned} />
+                <AbandonedPropertyList abandonedPropertyList={foundAbandoned} />
               )}
               {!showNothi && !showAbandoned && (
                 <div className="text-center py-12 text-lg text-red-500 font-semibold">

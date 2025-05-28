@@ -23,6 +23,7 @@ export async function login({
   if (user) {
     const cookieStore = await cookies();
     cookieStore.set('user', user.id);
+    cookieStore.set('user_vumi_role', user.role);
     return { message: 'Login success!', success: true };
   }
   return { message: 'Invalid credentials', success: false };

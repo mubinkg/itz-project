@@ -1,32 +1,9 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { getUsers, deleteUser, User } from "@/actions/users"; // Import User type
-import UserForm from '@/components/user-mgt/UserForm';
-import UserList from '@/components/user-mgt/UserList';
-import { Skeleton } from "@/components/ui/skeleton";
-import { Building2, ListChecks, UsersIcon } from 'lucide-react';
+
+import { getUsers } from "@/actions/users"; 
+import { UsersIcon } from 'lucide-react';
 import { cookies } from 'next/headers';
 import UsersPageClient from '@/components/user-mgt/UsersPageClient';
 import AccessDenied from '@/components/common/AccessDenied';
-
-function UserListSkeleton() {
-    return (
-        <div className="space-y-4">
-            {[...Array(3)].map((_, i) => (
-                <div key={i} className="flex items-center space-x-4 p-4 border rounded-lg">
-                    <Skeleton className="h-12 w-12 rounded-full" />
-                    <div className="space-y-2 flex-1">
-                        <Skeleton className="h-4 w-[200px]" />
-                        <Skeleton className="h-3 w-[150px]" />
-                    </div>
-                    <div className="flex space-x-2">
-                        <Skeleton className="h-8 w-16" />
-                        <Skeleton className="h-8 w-16" />
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-}
 
 export default async function UsersPage() {
   // Get the role from cookies

@@ -1,5 +1,4 @@
 import { LoginForm } from '@/components/login-form';
-import { prisma } from '@/lib/db';
 
 export default async function Page() {
   return (

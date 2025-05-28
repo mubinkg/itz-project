@@ -11,6 +11,7 @@ export default function NothiPageClient({ mouzaData, nothiList }: any) {
   const [editData, setEditData] = useState([null] as any);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  console.log(isPending, 'isPending');
 
   const handleFinishEdit = () => {
     setEditData(null);

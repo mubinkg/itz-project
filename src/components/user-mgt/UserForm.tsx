@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { User, Mail, Lock, Camera, UserCheck, X, Plus } from "lucide-react"
+import { User, Mail, Lock, UserCheck, X, Plus } from "lucide-react"
 
 export default function UserForm({
     editingUser,

@@ -23,6 +23,7 @@ export async function createMouja({
       message: 'Mouja created successfully!',
     };
   } catch (err) {
+    console.error(err);
     return {
       success: false,
       message: 'Error on creating mouja!',
@@ -46,6 +47,7 @@ export async function deleteMouja(id: string) {
       message: 'Mouja deleted successfully!',
     };
   } catch (err) {
+    console.error(err);
     return {
       success: false,
       message: 'Error on deleting mouja!',
@@ -68,6 +70,7 @@ export async function updateMouja(data: { id: string; name: string; jlNo: string
       message: "মৌজা সফলভাবে আপডেট হয়েছে",
     };
   } catch (error) {
+    console.error(error);
     return {
       success: false,
       message: "মৌজা আপডেট করতে সমস্যা হয়েছে",

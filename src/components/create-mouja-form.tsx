@@ -35,12 +35,22 @@ const CreateMoujaForm = ({
   const handleSubmit = async () => {
     if (editingId) {
       // Update Mouja
-      await updateMouja({ id: editingId, name, jlNo });
-      if (onFinishEdit) onFinishEdit();
+      const res = await updateMouja({ id: editingId, name, jlNo });
+      if (res.success) {
+        toast.success(res.message || "মৌজা সফলভাবে আপডেট হয়েছে");
+        if (onFinishEdit) onFinishEdit();
+      } else {
+        toast.error(res.message || "মৌজা আপডেট করতে সমস্যা হয়েছে");
+      }
     } else {
       // Create Mouja
-      await createMouja({ name, jlNo });
-      router.refresh();
+      const res = await createMouja({ name, jlNo });
+      if (res.success) {
+        toast.success(res.message || "মৌজা সফলভাবে তৈরি হয়েছে");
+        router.refresh();
+      } else {
+        toast.error(res.message || "মৌজা তৈরি করতে সমস্যা হয়েছে");
+      }
     }
   };
 

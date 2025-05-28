@@ -3,7 +3,7 @@ import NothiList from '@/components/nothi/NothiList'
 import AbandonedPropertyList from '@/components/abandoned-property/AbandonedPropertyList'
 import { prisma } from '@/lib/db'
 import { Card } from "@/components/ui/card"
-import { Building2, MapPin, Phone } from "lucide-react"
+import { Building2, MapPin } from "lucide-react"
 
 export default async function LandOffice({
   searchParams,
@@ -51,7 +51,6 @@ export default async function LandOffice({
   })
 
   // --- Search logic ---
-  let foundType = 'none';
   let foundNothi: any[] = [];
   let foundAbandoned: any[] = [];
   let showNothi = false;
@@ -59,7 +58,7 @@ export default async function LandOffice({
 
   if (params?.lineNo) {
     // Full match for lineNo in nothiList (supporting multiple lineNo per row)
-    foundNothi = nothiList.filter((item) => {
+    foundNothi = nothiList.filter((item: any) => {
       if (!item.lineNo) return false;
       const searchLineNo = params.lineNo ?? '';
       // If lineNo is an array
@@ -75,7 +74,7 @@ export default async function LandOffice({
 
     // Full match for dagNo in abandonedData
     foundAbandoned = abandentData.filter(
-      (item) => item.dagNo && item.dagNo.toString() === params.lineNo
+      (item: any) => item.dagNo && item.dagNo.toString() === params.lineNo
     );
     showNothi = foundNothi.length > 0;
     showAbandoned = foundAbandoned.length > 0;

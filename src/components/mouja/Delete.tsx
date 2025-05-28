@@ -29,6 +29,7 @@ const Delete = ({ id }: { id: string }) => {
       toast.success("মৌজা সফলভাবে মুছে ফেলা হয়েছে")
       router.refresh()
     } catch (error) {
+      console.error("Error deleting mouja:", error)
       toast.error("মৌজা মুছতে সমস্যা হয়েছে")
     } finally {
       setIsDeleting(false)

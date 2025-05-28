@@ -2,12 +2,11 @@
 
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { MoujaSelect } from '../mouja/MoujaSelect'
 import { Mouja } from '@/generated/prisma'
 import { useRouter } from 'next/navigation'
-import { Search, Filter, RotateCcw } from "lucide-react"
+import { Search, Filter } from "lucide-react"
 
 const DashboardFilter = ({ mouzaData }: { mouzaData: Mouja[] }) => {
   const router = useRouter()

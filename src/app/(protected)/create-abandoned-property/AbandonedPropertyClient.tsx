@@ -4,7 +4,7 @@ import { useState, useTransition } from 'react';
 import AbandonedPropertyList from '@/components/abandoned-property/AbandonedPropertyList';
 import CreateAbandonedProperty from '@/components/abandoned-property/CreateAbandonedProperty';
 import { useRouter } from 'next/navigation';
-import { Building2, ListChecks } from 'lucide-react';
+import { ListChecks } from 'lucide-react';
 
 export default function AbandonedPropertyClient({
   mouzaData,
@@ -16,6 +16,7 @@ export default function AbandonedPropertyClient({
   const [editData, setEditData] = useState<Record<string, any> | null>(null);
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  console.log(isPending, 'isPending');
 
   const handleFinishEdit = () => {
     setEditData(null);

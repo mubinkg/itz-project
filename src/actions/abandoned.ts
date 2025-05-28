@@ -43,6 +43,7 @@ export async function createAbandoned({
       message: 'Abandoned property created successfully!',
     };
   } catch (err) {
+    console.log(err);
     return {
       success: false,
       message: 'Error on creating abandoned property!',
@@ -94,6 +95,7 @@ export async function deleteAbandoned(id: string) {
     await prisma.abandoned.delete({ where: { id } });
     return { success: true, message: 'Abandoned property deleted successfully!' };
   } catch (err) {
+    console.error(err);
     return { success: false, message: 'Error deleting abandoned property!' };
   }
 }

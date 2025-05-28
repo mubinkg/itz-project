@@ -13,6 +13,7 @@ export default function MoujaPage({ mouzaData }: { mouzaData: any[] }) {
   const [editData, setEditData] = useState<any>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  console.log(isPending, 'isPending');
 
   const handleFinishEdit = () => {
     setEditData(null);

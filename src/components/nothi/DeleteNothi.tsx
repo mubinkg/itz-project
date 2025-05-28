@@ -29,6 +29,7 @@ const DeleteNothi = ({ id }: { id: string }) => {
       toast.success("নথি সফলভাবে মুছে ফেলা হয়েছে");
       router.refresh();
     } catch (error) {
+      console.error("Error deleting nothi:", error);
       toast.error("নথি মুছতে সমস্যা হয়েছে");
     } finally {
       setIsDeleting(false);

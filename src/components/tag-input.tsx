@@ -69,3 +69,6 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
     );
   },
 );
+
+// Assign a display name for better debugging
+InputTags.displayName = 'InputTags';
